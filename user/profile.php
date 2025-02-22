@@ -4,7 +4,7 @@
         <p class="text-sm opacity-90">Manage account profile</p>
         <hr class="my-4">
     </div>
-    <form action="/agrilink/modules/update/update_profile.php" method="post" enctype="multipart/form-data">
+    <form action="/AgriLink/modules/update/update_profile.php" method="post" enctype="multipart/form-data">
     <input type="hidden" name="id" value="<?php echo $user['id'] ?>">   
     <div class="w-full grid grid-cols-3 px-6">
         <div class="col-span-2">
@@ -61,7 +61,7 @@
         </div>
         <div class="w-full aspect-square border-l-2 mt-6 flex flex-col items-center justify-center">
             <div class="bg-primary w-32 h-32 rounded-full mb-6">
-                <img src="<?php echo $user['image'] ? '/agrilink/assets/users/'.$user['image'] : '/agrilink/assets/images/default_avatar.png' ?>" alt="" id="profile-image" class="w-full h-full object-cover rounded-full">
+                <img src="<?php echo $user['image'] ? '/AgriLink/assets/users/'.$user['image'] : '/AgriLink/assets/images/default_avatar.png' ?>" alt="" id="profile-image" class="w-full h-full object-cover rounded-full">
             </div>
             <div class="btn btn-neutral border-gray-400 border-1 btn-sm cursor-pointer relative">
                 <label for="image" class="cursor-pointer">Select image</label>

@@ -16,7 +16,7 @@
                         </button>
                     </div>
                     <!-- Modal body -->
-                    <form action="/agrilink/modules/'.$module.'" method="post" enctype="multipart/form-data">
+                    <form action="/AgriLink/modules/'.$module.'" method="post" enctype="multipart/form-data">
                         <div class="p-6 grid gap-3">
                         <input type="hidden" name="id" value="'.$id.'" />
                         ';

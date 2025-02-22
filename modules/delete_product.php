@@ -20,5 +20,5 @@
     }
 
     $crud->delete('product', $_POST['id']);
-    header("Location: /agrilink/dashboard/admin.php?".$_POST['location']);
+    header("Location: /AgriLink/dashboard/admin.php?".$_POST['location']);
 ?>

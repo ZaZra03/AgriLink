@@ -20,7 +20,7 @@
             session_start();
         }
         function redirect() {
-            header("Location: /agrilink/index.php");
+            header("Location: /AgriLink/index.php");
             die();
         }
         require_once("./helpers/crud.php");

@@ -21,7 +21,7 @@
 <?php
     $productCount = 0;
     if(!isset($_GET['search']) || $_GET['search'] == null) {
-        header("Location: /agrilink/index.php");
+        header("Location: /AgriLink/index.php");
     }
     include "./components/navbar.php";
     $records = $crud->search("product", $_GET['search'], ["name", "type"]);
@@ -62,14 +62,14 @@
                                 echo '
                                     <div class="flex flex-col justify-center items-center w-full gap-1 bg-neutral">
                                         <div class="w-full aspect-square bg-gray-300 rounded-t-lg overflow-hidden">
-                                            <img src="/agrilink/assets/products/'.$records[$i]['image'].'" class="w-full h-full object-cover" />
+                                            <img src="/AgriLink/assets/products/'.$records[$i]['image'].'" class="w-full h-full object-cover" />
                                         </div>
                                         <h1 class="text-sm font-bold text-neutral-content break-words text-center">'.(strlen($records[$i]['name']) <= 17 ? $records[$i]['name'] : substr($records[$i]['name'], 0, 17)."...").'</h1>
                                         <div class="w-full flex justify-between font-semibold items-center px-2">
                                             <p class="text-primary">₱'.number_format(round((int)$records[$i]['price'] - ((int)$records[$i]['price'] * ((int)$records[$i]['discount']/100)))).'.00</p>
                                             <span class="text-neutral-content opacity-70 text-xs">'.((int)$records[$i]['stock'] - (int)$records[$i]['available']).' sold</span>
                                         </div>
-                                        <a href="/agrilink/product.php?id='.$records[$i]['id'].'" class="rounded-t-none btn btn-primary btn-sm col-span-2 w-full">Buy</a>
+                                        <a href="/AgriLink/product.php?id='.$records[$i]['id'].'" class="rounded-t-none btn btn-primary btn-sm col-span-2 w-full">Buy</a>
                                     </div>
                                 ';
                             }

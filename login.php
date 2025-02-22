@@ -79,7 +79,7 @@
                     <h2 class="text-2xl font-bold text-base-content :text-white">
                         Login
                     </h2>
-                    <form class="mt-8 space-y-6" action="/agrilink/modules/login.php" method="post">
+                    <form class="mt-8 space-y-6" action="/AgriLink/modules/login.php" method="post">
                         <div>
                             <label for="email" class="block mb-2 text-sm font-medium text-base-content :text-white">Email</label>
                             <input type="email" name="email" id="email" class="bg-white border border-gray-300 text-base-content sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 :bg-gray-700 :border-gray-600 :placeholder-gray-400 :text-white :focus:ring-primary-500 :focus:border-primary-500" required="">
@@ -92,21 +92,21 @@
                             <button type="submit" class="btn btn-primary w-28">Login</button>
                         </div>
                         <div class="text-sm font-medium text-gray-500 :text-gray-400">
-                            New user? <a href="/agrilink/account_type.php" class="text-primary hover:underline :text-primary-500">Sign up</a>
+                            New user? <a href="/AgriLink/account_type.php" class="text-primary hover:underline :text-primary-500">Sign up</a>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
         <!-- <div class="flex flex-col items-center px-6 mx-auto mt-36 :bg-gray-900">
-            <a href="/agrilink/index.php" class="normal-case text-xl mb-10">
+            <a href="/AgriLink/index.php" class="normal-case text-xl mb-10">
                 <img src="./assets/images/logo.png" class="w-44 h-44" alt="">
             </a>
             <div class="w-full max-w-md p-6 space-y-8 sm:p-8 bg-white rounded-lg shadow :bg-gray-800">
                 <h2 class="text-2xl font-bold text-base-content :text-white">
                     Login
                 </h2>
-                <form class="mt-8 space-y-6" action="/agrilink/modules/login.php" method="post">
+                <form class="mt-8 space-y-6" action="/AgriLink/modules/login.php" method="post">
                     <div>
                         <label for="email" class="block mb-2 text-sm font-medium text-base-content :text-white">Email</label>
                         <input type="email" name="email" id="email" class="bg-white border border-gray-300 text-base-content sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 :bg-gray-700 :border-gray-600 :placeholder-gray-400 :text-white :focus:ring-primary-500 :focus:border-primary-500" required="">
@@ -119,7 +119,7 @@
                         <button type="submit" class="btn btn-primary w-28">Login</button>
                     </div>
                     <div class="text-sm font-medium text-gray-500 :text-gray-400">
-                        Doesn't have an account? <a href="/agrilink/signup.php" class="text-primary hover:underline :text-primary-500">Sign up</a>
+                        Doesn't have an account? <a href="/AgriLink/signup.php" class="text-primary hover:underline :text-primary-500">Sign up</a>
                     </div>
                 </form>
             </div>

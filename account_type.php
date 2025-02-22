@@ -44,7 +44,7 @@
     
     <main class="bg-base-100 :bg-gray-900">
         <div class="flex flex-col items-center px-6 pt-20 mx-auto md:h-screen pt:mt-0 :bg-gray-900">
-            <a href="/agrilink/index.php" class="normal-case text-xl mb-10">
+            <a href="/AgriLink/index.php" class="normal-case text-xl mb-10">
                 <img src="./assets/images/logo.png" class="w-44 h-44" alt="">
             </a>
             <!-- Card -->

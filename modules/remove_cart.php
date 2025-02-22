@@ -7,5 +7,5 @@
             $crud->delete("cart", $item);
         }
     }
-    header('Location: /agrilink/cart.php');
+    header('Location: /AgriLink/cart.php');
 ?>

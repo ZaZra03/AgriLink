@@ -56,8 +56,8 @@ $user_name = $crud->search("user", $_POST['name'], ['name']);
 
 if (!$user_count && !$user_name) {
     $crud->create("user", $data);
-    header("Location: /agrilink/signup_" . $_POST['role'] . ".php?status=success");
+    header("Location: /AgriLink/signup_" . $_POST['role'] . ".php?status=success");
 } else {
-    header("Location: /agrilink/signup_" . $_POST['role'] . ".php?status=error");
+    header("Location: /AgriLink/signup_" . $_POST['role'] . ".php?status=error");
 }
 ?>

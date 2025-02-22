@@ -11,5 +11,5 @@
         "type" => "complete",
         "datetime" => date('Y-m-d H:i:s')
     ]);
-    header("Location: /agrilink/dashboard/admin.php?page=checkouts&tab=receive");
+    header("Location: /AgriLink/dashboard/admin.php?page=checkouts&tab=receive");
 ?>

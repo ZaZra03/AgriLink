@@ -27,5 +27,5 @@
 
     $crud->create('refund', $data);
     $crud->update('checkout', $_POST['order_id'], ["status" => "return"]);
-    header("Location: /agrilink/user.php?page=purchase&tab=return");
+    header("Location: /AgriLink/user.php?page=purchase&tab=return");
 ?>

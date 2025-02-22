@@ -25,16 +25,16 @@
     <?php
         require_once("./helpers/crud.php");
         if (!isset($_SESSION['user_id'])) {
-            header("Location: /agrilink/login.php");
+            header("Location: /AgriLink/login.php");
         }
         include "./components/navbar.php";
     ?>
 
     <div class="max-w-[965px] mx-auto pt-5 pb-96">
         <h1 class="font-bold text-3xl text-center text-neutral-content py-5">CART</h1>
-        <form action="/agrilink/modules/remove_cart.php" method="post" onkeydown="return event.key != 'Enter';">
+        <form action="/AgriLink/modules/remove_cart.php" method="post" onkeydown="return event.key != 'Enter';">
         <?php
-            $records = $crud->search("cart", $user['name'], ["buyer"]);
+            $records = $crud->search("cart", $user['id'], ["buyer_id"]);
             $i = 0;
             if ($records) {
                 foreach ($records as $record) {
@@ -46,14 +46,14 @@
                             <div class="flex items-center border-b border-gray-200 pb-3">
                                 <div class="flex items-center gap-2">
                                     <h1 class="font-bold text-xs">Product</h1>
-                                    <a href="/agrilink/product.php?id='.$record['product_id'].'" class="btn btn-xs btn-neutral border border-gray-300">View Product</a>
+                                    <a href="/AgriLink/product.php?id='.$record['product_id'].'" class="btn btn-xs btn-neutral border border-gray-300">View Product</a>
                                 </div>
                             </div>
                             <div class="flex items-center justify-between py-3">
                                 <div class="flex items-center gap-4">
                                     <input type="checkbox" name="foo[]" value="'.$record['id'].'" '.($i == 0 ? "checked" : "").' class="checkbox checkbox-sm" />
                                     <div class="w-24 h-24 bg-primary rounded overflow-hidden">
-                                        <img src="/agrilink/assets/products/'.$product['image'].'" class="w-full h-full object-cover" />
+                                        <img src="/AgriLink/assets/products/'.$product['image'].'" class="w-full h-full object-cover" />
                                     </div>
                                     <div>
                                         <div class="font-semibold mb-1 w-36">'.$product['name'].'</div>
@@ -72,12 +72,12 @@
                                     <button type="button" name="decrement" class="w-7 h-7 border border-gray-300 p-2">
                                         <svg class="w-full h-full" enable-background="new 0 0 10 10" viewBox="0 0 10 10" x="0" y="0" class="shopee-svg-icon"><polygon points="4.5 4.5 3.5 4.5 0 4.5 0 5.5 3.5 5.5 4.5 5.5 10 5.5 10 4.5"></polygon></svg>
                                     </button>
-                                    <input id="'.'qty'.$i.'" class="input input-sm border border-gray-300 h-7 max-w-[4em] rounded-none bg-neutral text-center" value="'.$record['qty'].'" type="number" min="1" oninput="this.value <= 0 ? this.value = 1 : Math.abs(this.value)" />
+                                    <input id="'.'qty'.$i.'" class="input input-sm border border-gray-300 h-7 max-w-[4em] rounded-none bg-neutral text-center" value="'.$record['qty'].'" min="1" oninput="this.value <= 0 ? this.value = 1 : Math.abs(this.value)" />
                                     <button type="button" name="increment" class="w-7 h-7 border border-gray-300 p-2">
                                         <svg class="w-full h-full" enable-background="new 0 0 10 10" viewBox="0 0 10 10" x="0" y="0" class="shopee-svg-icon icon-plus-sign"><polygon points="10 4.5 5.5 4.5 5.5 0 4.5 0 4.5 4.5 0 4.5 0 5.5 4.5 5.5 4.5 10 5.5 10 5.5 5.5 10 5.5"></polygon></svg>
                                     </button>
                                 </div>
-                                <a href="/agrilink/modules/delete_cart_item.php?id='.$record['id'].'" class="hover:text-primary cursor-pointer text-sm pr-3">Delete</a>
+                                <a href="/AgriLink/modules/delete_cart_item.php?id='.$record['id'].'" class="hover:text-primary cursor-pointer text-sm pr-3">Delete</a>
                             </div>
                         </div>
                         <!-- END OF CARD -->
@@ -121,7 +121,7 @@
                             echo '
                                 <div class="flex flex-col justify-center items-center w-full gap-1 bg-neutral">
                                     <div class="w-full aspect-square bg-gray-300 rounded-t-lg overflow-hidden">
-                                        <img src="/agrilink/assets/products/'.$suggest[$i]['image'].'" class="w-full h-full object-cover" />
+                                        <img src="/AgriLink/assets/products/'.$suggest[$i]['image'].'" class="w-full h-full object-cover" />
                                     </div>
                                     <h1 class="text-sm font-bold text-neutral-content break-words text-center">'.(strlen($suggest[$i]['name']) <= 17 ? $suggest[$i]['name'] : substr($suggest[$i]['name'], 0, 17)."...").'</h1>
                                     <div class="w-full flex justify-between font-semibold items-center px-2">
@@ -224,7 +224,7 @@
         let initialPrice = document.getElementsByClassName("total")[0].innerHTML.replace("₱", "");
             initialPrice = parseInt(initialPrice.replace(",", ""));
         document.getElementById("price").innerHTML = "₱" + initialPrice.toLocaleString() + ".00";
-        document.getElementById("check_out").href = "/agrilink/checkout.php?" + 0 + "=" + document.getElementsByName("foo[]")[0].value + "&qty0=" + document.getElementById("qty0").value;
+        document.getElementById("check_out").href = "/AgriLink/checkout.php?" + 0 + "=" + document.getElementsByName("foo[]")[0].value + "&qty0=" + document.getElementById("qty0").value;
         function toggle(source) {
             checkboxes = document.getElementsByName('foo[]');
             for(var i=0, n=checkboxes.length;i<n;i++) {
@@ -267,7 +267,7 @@
                     paramIndex++;
                 }
             }
-            document.getElementById("check_out").href = "/agrilink/checkout.php?" + param;
+            document.getElementById("check_out").href = "/AgriLink/checkout.php?" + param;
         }
 
         let items = document.getElementsByName('foo[]');
@@ -293,7 +293,7 @@
                         paramIndex++;
                     }
                 }
-                document.getElementById("check_out").href = "/agrilink/checkout.php?" + param;
+                document.getElementById("check_out").href = "/AgriLink/checkout.php?" + param;
                 document.getElementById("price").innerHTML = "₱" + overall.toLocaleString() + ".00";
                 document.getElementById("items").innerHTML = "Total item ("+k+"):";
                 if(k < 1) {

@@ -13,5 +13,5 @@
         "type" => "refund",
         "datetime" => date('Y-m-d H:i:s')
     ]);
-    header("Location: /agrilink/dashboard/admin.php?page=checkouts&tab=return");
+    header("Location: /AgriLink/dashboard/admin.php?page=checkouts&tab=return");
 ?>

@@ -32,5 +32,5 @@
     ];
 
     $crud->create('product', $data);
-    header("Location: /agrilink/dashboard/admin.php?".$_POST['location']);
+    header("Location: /AgriLink/dashboard/admin.php?".$_POST['location']);
 ?>

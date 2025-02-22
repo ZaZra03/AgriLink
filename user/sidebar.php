@@ -1,11 +1,11 @@
 <aside class="w-full h-full">
     <div class="py-4 flex gap-3 items-center text-base-content border-primary border-b">
         <div class="w-12 h-12 rounded-full bg-primary overflow-hidden">
-            <img src="<?php echo $user['image'] ? '/agrilink/assets/users/'.$user['image'] : '/agrilink/assets/images/default_avatar.png' ?>" class="w-full h-full object-cover" alt="">
+            <img src="<?php echo $user['image'] ? '/AgriLink/assets/users/'.$user['image'] : '/AgriLink/assets/images/default_avatar.png' ?>" class="w-full h-full object-cover" alt="">
         </div>
         <div>
             <h1 class="font-semibold"><?php echo $user['name'] ?></h1>
-            <a href="/agrilink/user.php" class="opacity-80 text-sm">Edit Profile</a>
+            <a href="/AgriLink/user.php" class="opacity-80 text-sm">Edit Profile</a>
         </div>
     </div>
     <div class="py-3 flex flex-col gap-2 text-base-content">

@@ -3,7 +3,7 @@
     
     $data = [
         "product_id" => $_POST['id'],
-        "buyer" => $_POST['buyer'],
+        "buyer_id" => $_POST['buyer_id'],
         "qty" => (int)$_POST['qty'],
     ];
 
@@ -11,7 +11,7 @@
     $i = 0;
     if ($cart) {
         foreach ($cart as $item) {
-            if ($item['buyer'] == $_POST['buyer']) {
+            if ($item['buyer_id'] == $_POST['buyer_id']) {
                 $i = (int)$item['qty'];
                 $crud->delete("cart", $item['id']);
                 $i++;
@@ -26,5 +26,5 @@
         $crud->create("cart", $data);
     }
 
-    header("Location: /agrilink/product.php?id=".$_POST['id']."&status=success");
+    header("Location: /AgriLink/product.php?id=".$_POST['id']."&status=success");
 ?>

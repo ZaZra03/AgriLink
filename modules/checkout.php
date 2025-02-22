@@ -15,5 +15,5 @@
         $crud->create("checkout", $data);
         $crud->delete("cart", $_POST['cart_id'][$i]);
     }
-    header("Location: /agrilink/user.php?page=purchase");
+    header("Location: /AgriLink/user.php?page=purchase");
 ?>

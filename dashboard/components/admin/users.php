@@ -60,7 +60,7 @@
                                     <!-- TABLE ROW -->
                                     <tr class="bg-white border-b hover:bg-gray-50">
                                         <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap :text-white">
-                                            <img class="w-10 h-10 rounded-full" src="'.($record['image'] ? $record['image'] : "/agrilink/assets/images/default_avatar.png").'" alt="Jese image">
+                                            <img class="w-10 h-10 rounded-full" src="'.($record['image'] ? $record['image'] : "/AgriLink/assets/images/default_avatar.png").'" alt="Jese image">
                                             <div class="pl-3">
                                                 <div class="text-base font-semibold">'.$record['name'].'</div>
                                                 <div class="font-normal text-gray-500">'.$record['email'].'</div>

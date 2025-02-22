@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | AgriLink</title>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
     <script src="../javascript/tailwind.js"></script>
     <link rel="stylesheet" href="../assets/css/daisyui.css">
     <link rel="stylesheet" href="../assets/css/config.css">
@@ -46,7 +47,7 @@
 
         require_once("../helpers/crud.php");
         if (!isset($_SESSION['role']) || $_SESSION['role'] !== "admin") {
-            header("Location: /agrilink/index.php");
+            header("Location: /AgriLink/index.php");
         }
         $user = $crud->read("user", $_SESSION['user_id']);
         include "./components/admin/nav.php";
@@ -65,7 +66,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <!-- <script src="../javascript/charts.js" type="module"></script> -->
-    <script src="../javascript/flowbite.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
     <script>
         tailwind.config = {
             darkMode: 'class',

@@ -31,5 +31,5 @@
         "image" => ($_FILES['image']['name']!="") ? $filename.".".$ext : $crud->read($_POST['table'], $_POST['id'])['image'],
     ];
     $crud->update($_POST['table'], $_POST['id'], $data);
-    header("Location: /agrilink/dashboard/admin.php?".$_POST['location']."#".$_POST['id']);
+    header("Location: /AgriLink/dashboard/admin.php?".$_POST['location']."#".$_POST['id']);
 ?>

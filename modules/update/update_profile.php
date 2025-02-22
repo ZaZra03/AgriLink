@@ -34,5 +34,5 @@
         "image" => $image,
     ];
     $crud->update("user", $_POST['id'], $data);
-    header("Location: /agrilink/user.php?page=account");
+    header("Location: /AgriLink/user.php?page=account");
 ?>

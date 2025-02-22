@@ -114,7 +114,7 @@
                             echo '
                             <tr class="bg-white border-b :bg-gray-800 :border-gray-700 hover:bg-gray-50 :hover:bg-gray-600">
                                 <td class="w-32 p-4">
-                                    <img src="/agrilink/assets/products/'.$crud->read("product", (int)$record['product_id'])['image'].'" alt="'.$crud->read("product", (int)$record['product_id'])['name'].'">
+                                    <img src="/AgriLink/assets/products/'.$crud->read("product", (int)$record['product_id'])['image'].'" alt="'.$crud->read("product", (int)$record['product_id'])['name'].'">
                                 </td>
                                 <td class="px-6 py-4 font-semibold text-gray-900 :text-white">
                                     '.$prod['name'].'
@@ -207,7 +207,7 @@
                                                                 </button>
                                                             </div>
                                                             <!-- Modal body -->
-                                                            <form action="/agrilink/modules/add/add_refund.php" method="post" enctype="multipart/form-data">
+                                                            <form action="/AgriLink/modules/add/add_refund.php" method="post" enctype="multipart/form-data">
                                                                 <input type="hidden" name="" value="" />
                                                                 <div class="grid gap-3">
                                                                     <div class="p-6">
@@ -217,16 +217,16 @@
                                                                         </div>
                                                                         <div class="flex gap-2 items-center justify-between"><div>
                                                                             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image</label>
-                                                                            <img class="w-44" src="/agrilink/assets/refund/'.$refund[0]["image"].'" />
+                                                                            <img class="w-44" src="/AgriLink/assets/refund/'.$refund[0]["image"].'" />
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <!-- Modal footer -->
                                                                 <div class="flex justify-end items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-                                                                    <a href="/agrilink/modules/decline_refund.php?id='.$refund[0]['id'].'" class="text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-200 rounded-lg border border-red-200 text-sm font-medium px-5 py-2.5 hover:text-red-900 focus:z-10 dark:bg-red-700 dark:text-red-300 dark:border-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-600">
+                                                                    <a href="/AgriLink/modules/decline_refund.php?id='.$refund[0]['id'].'" class="text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-200 rounded-lg border border-red-200 text-sm font-medium px-5 py-2.5 hover:text-red-900 focus:z-10 dark:bg-red-700 dark:text-red-300 dark:border-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-600">
                                                                         Decline
                                                                     </a>
-                                                                    <a href="/agrilink/modules/approve_refund.php?id='.$refund[0]['id'].'" class="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-400 dark:focus:ring-green font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                                                                    <a href="/AgriLink/modules/approve_refund.php?id='.$refund[0]['id'].'" class="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-400 dark:focus:ring-green font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
                                                                         Approve
                                                                     </a>
                                                                 </div>

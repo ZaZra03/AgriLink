@@ -1,3 +1,11 @@
+<?php
+    if (isset($_SESSION['role'])) {
+        if ($_SESSION['role'] == "admin") {
+            header("Location: /AgriLink/admin/admin.php");
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en" data-theme="agrilink" class="min-h-full">
 <head>
@@ -5,6 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AgriLink</title>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
     <script src="./javascript/tailwind.js"></script>
     <link rel="stylesheet" href="./assets/css/daisyui.css">
     <link rel="stylesheet" href="./assets/css/config.css">
@@ -92,5 +101,6 @@
     <?php
         include "./components/footer.php";
     ?>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
 </body>
 </html>

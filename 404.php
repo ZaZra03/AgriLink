@@ -31,7 +31,7 @@
                         </div>
                     <h5 class="text-neutral-content font-semibold -mr-10 -mt-3">Page not found</h5>
                     <p class="text-neutral-content opacity-90 mt-2 mb-6">we are sorry, but the page you requested was not found</p>
-                    <a href="/agrilink/index.php"
+                    <a href="/AgriLink/index.php"
                         class="bg-primary cursor-pointer px-5 py-3 text-sm shadow-sm font-medium tracking-wider text-primary-content rounded-full hover:shadow-lg">
                         Got to Home
                     </a>

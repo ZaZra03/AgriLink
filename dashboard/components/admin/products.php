@@ -115,7 +115,7 @@
                                 echo '
                                 <tr id="'.$record['id'].'" class="bg-white border-b :bg-gray-800 :border-gray-700 hover:bg-gray-50 :hover:bg-gray-600">
                                     <td>
-                                        <img class="w-32 object-cover py-4 pl-4 aspect-square" src="/agrilink/assets/products/'.$record['image'].'" alt="'.$record['name'].'">
+                                        <img class="w-32 object-cover py-4 pl-4 aspect-square" src="/AgriLink/assets/products/'.$record['image'].'" alt="'.$record['name'].'">
                                     </td>
                                     <td class="pr-6 py-4 font-semibold text-gray-900 :text-white">
                                         '.$record['name'].'
@@ -181,7 +181,7 @@
                                 echo '
                                 <tr id="'.$record['id'].'" class="bg-white border-b :bg-gray-800 :border-gray-700 hover:bg-gray-50 :hover:bg-gray-600">
                                     <td>
-                                        <img class="w-32 object-cover py-4 pl-4 aspect-square" src="/agrilink/assets/products/'.$record['image'].'" alt="'.$record['name'].'">
+                                        <img class="w-32 object-cover py-4 pl-4 aspect-square" src="/AgriLink/assets/products/'.$record['image'].'" alt="'.$record['name'].'">
                                     </td>
                                     <td class="pr-6 py-4 font-semibold text-gray-900 :text-white">
                                         '.$record['name'].'

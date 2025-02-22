@@ -1,10 +1,28 @@
+<?php
+    require_once("./helpers/crud.php");
+    if (isset($_SESSION['user_id'])) {
+        $user = $crud->read("user", $_SESSION['user_id']);
+    }
+    if (isset($_GET['id'])) {
+        $product_view = $crud->read("product", $_GET['id']);
+        if (!$product_view) {
+            header("Location: /AgriLink/404.php");
+        }
+        $seller = $crud->read("user", $product_view['seller_id']);
+    } else {
+        header("Location: /AgriLink/404.php");
+    }
+    include "./components/navbar.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en" data-theme="agrilink">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>AgriLink</title>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
     <script src="./javascript/tailwind.js"></script>
     <link rel="stylesheet" href="./assets/css/daisyui.css">
     <link rel="stylesheet" href="./assets/css/config.css">
@@ -24,22 +42,9 @@
 </head>
 <body class="relative">
     <?php
-        require_once("./helpers/crud.php");
-        if (isset($_GET['id'])) {
-            $product_view = $crud->read("product", $_GET['id']);
-            if (!$product_view) {
-                header("Location: /agrilink/404.php");
-            }
-            $seller = $crud->read("user", $product_view['seller_id']);
-        } else {
-            header("Location: /agrilink/404.php");
-        }
-        include "./components/navbar.php";
-    ?>
-    <?php
         if(isset($_GET['status']) && $_GET['status'] == "error") {
             echo '
-            <div id="error" class="alert alert-error flex fixed top-5 left-[50%] w-[30%] translate-x-[-50%]">
+            <div id="error" class="alert alert-error flex fixed mt-20 top-5 left-[50%] w-auto max-w-[400px] translate-x-[-50%] px-4 py-2">
                 <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                 <span>Incorrect password.</span>
             </div>
@@ -64,10 +69,11 @@
             ';
         } else if (isset($_GET['status']) && $_GET['status'] == "success") {
             echo '
-            <div id="success" class="alert alert-success flex fixed top-5 left-[50%] w-[30%] translate-x-[-50%]">
+            <div id="success" class="alert alert-success flex fixed mt-20 top-5 left-[50%] w-auto max-w-[400px] translate-x-[-50%] px-4 py-2">
                 <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                 <span>Product added to cart.</span>
             </div>
+
             <style>
                 #success {
                     opacity: 0;
@@ -88,81 +94,82 @@
             ';
         }
     ?>
+
     <div class="max-w-[965px] mx-auto pb-96 pt-[3em]">
         <!-- PRODUCT DESCRIPTION -->
         <div class="grid grid-cols-3 w-full mt-10 bg-neutral p-5 rounded gap-4">
             <div class="">
                 <div class="bg-gray-300 w-full aspect-square overflow-hidden">
-                    <img src="/agrilink/assets/products/<?php echo $product_view['image'] ?>" alt="" class="w-full h-full object-cover">
+                    <img src="/AgriLink/assets/products/<?php echo $product_view['image'] ?>" alt="" class="w-full h-full object-cover">
                 </div>
             </div>
             <div class="col-span-2">
                 <form action="./modules/add_to_cart.php" method="post">
-                <h1 class="text-xl font-semibold"><?php echo $product_view['name'] ?></h1>
-                <div class="flex justify-between">
-                    <div class="flex items-center">
-                        <!-- <div class="flex items-center text-gray-400">
-                            <h1 class="link link-primary mr-1">5.0</h1>
-                            <svg class="h-4 w-4" enable-background="new 0 0 15 15" fill="hsl(var(--p))" viewBox="0 0 15 15" x="0" y="0" class="shopee-svg-icon shopee-rating-stars__primary-star icon-rating-solid"><polygon points="7.5 .8 9.7 5.4 14.5 5.9 10.7 9.1 11.8 14.2 7.5 11.6 3.2 14.2 4.3 9.1 .5 5.9 5.3 5.4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"></polygon></svg>
-                            <svg class="h-4 w-4" enable-background="new 0 0 15 15" fill="hsl(var(--p))" viewBox="0 0 15 15" x="0" y="0" class="shopee-svg-icon shopee-rating-stars__primary-star icon-rating-solid"><polygon points="7.5 .8 9.7 5.4 14.5 5.9 10.7 9.1 11.8 14.2 7.5 11.6 3.2 14.2 4.3 9.1 .5 5.9 5.3 5.4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"></polygon></svg>
-                            <svg class="h-4 w-4" enable-background="new 0 0 15 15" fill="hsl(var(--p))" viewBox="0 0 15 15" x="0" y="0" class="shopee-svg-icon shopee-rating-stars__primary-star icon-rating-solid"><polygon points="7.5 .8 9.7 5.4 14.5 5.9 10.7 9.1 11.8 14.2 7.5 11.6 3.2 14.2 4.3 9.1 .5 5.9 5.3 5.4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"></polygon></svg>
-                            <svg class="h-4 w-4" enable-background="new 0 0 15 15" fill="hsl(var(--p))" viewBox="0 0 15 15" x="0" y="0" class="shopee-svg-icon shopee-rating-stars__primary-star icon-rating-solid"><polygon points="7.5 .8 9.7 5.4 14.5 5.9 10.7 9.1 11.8 14.2 7.5 11.6 3.2 14.2 4.3 9.1 .5 5.9 5.3 5.4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"></polygon></svg>
-                            <svg class="h-4 w-4 mr-2" enable-background="new 0 0 15 15" fill="hsl(var(--p))" viewBox="0 0 15 15" x="0" y="0" class="shopee-svg-icon shopee-rating-stars__primary-star icon-rating-solid"><polygon points="7.5 .8 9.7 5.4 14.5 5.9 10.7 9.1 11.8 14.2 7.5 11.6 3.2 14.2 4.3 9.1 .5 5.9 5.3 5.4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"></polygon></svg>
-                            |
+                    <h1 class="text-xl font-semibold"><?php echo $product_view['name'] ?></h1>
+                    <div class="flex justify-between">
+                        <div class="flex items-center">
+                            <!-- <div class="flex items-center text-gray-400">
+                                <h1 class="link link-primary mr-1">5.0</h1>
+                                <svg class="h-4 w-4" enable-background="new 0 0 15 15" fill="hsl(var(--p))" viewBox="0 0 15 15" x="0" y="0" class="shopee-svg-icon shopee-rating-stars__primary-star icon-rating-solid"><polygon points="7.5 .8 9.7 5.4 14.5 5.9 10.7 9.1 11.8 14.2 7.5 11.6 3.2 14.2 4.3 9.1 .5 5.9 5.3 5.4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"></polygon></svg>
+                                <svg class="h-4 w-4" enable-background="new 0 0 15 15" fill="hsl(var(--p))" viewBox="0 0 15 15" x="0" y="0" class="shopee-svg-icon shopee-rating-stars__primary-star icon-rating-solid"><polygon points="7.5 .8 9.7 5.4 14.5 5.9 10.7 9.1 11.8 14.2 7.5 11.6 3.2 14.2 4.3 9.1 .5 5.9 5.3 5.4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"></polygon></svg>
+                                <svg class="h-4 w-4" enable-background="new 0 0 15 15" fill="hsl(var(--p))" viewBox="0 0 15 15" x="0" y="0" class="shopee-svg-icon shopee-rating-stars__primary-star icon-rating-solid"><polygon points="7.5 .8 9.7 5.4 14.5 5.9 10.7 9.1 11.8 14.2 7.5 11.6 3.2 14.2 4.3 9.1 .5 5.9 5.3 5.4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"></polygon></svg>
+                                <svg class="h-4 w-4" enable-background="new 0 0 15 15" fill="hsl(var(--p))" viewBox="0 0 15 15" x="0" y="0" class="shopee-svg-icon shopee-rating-stars__primary-star icon-rating-solid"><polygon points="7.5 .8 9.7 5.4 14.5 5.9 10.7 9.1 11.8 14.2 7.5 11.6 3.2 14.2 4.3 9.1 .5 5.9 5.3 5.4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"></polygon></svg>
+                                <svg class="h-4 w-4 mr-2" enable-background="new 0 0 15 15" fill="hsl(var(--p))" viewBox="0 0 15 15" x="0" y="0" class="shopee-svg-icon shopee-rating-stars__primary-star icon-rating-solid"><polygon points="7.5 .8 9.7 5.4 14.5 5.9 10.7 9.1 11.8 14.2 7.5 11.6 3.2 14.2 4.3 9.1 .5 5.9 5.3 5.4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"></polygon></svg>
+                                |
+                            </div>
+                            <div class="ml-2 flex gap-1 text-gray-400">
+                                <h1 class="link link-primary mr-1"><?php echo $ratings ? count($ratings) : 0 ?></h1>
+                                <h2 class="text-gray-500 mr-2">Ratings</h2>
+                                |
+                            </div> -->
+                            <div class="ml-2 flex gap-1 text-gray-400">
+                                <h1 class="link link-primary mr-1"><?php echo (int)$product_view['stock'] - (int)$product_view['available'] ?></h1>
+                                <h2 class="text-gray-500 mr-2">Sold</h2>
+                            </div>
                         </div>
-                        <div class="ml-2 flex gap-1 text-gray-400">
-                            <h1 class="link link-primary mr-1"><?php echo $ratings ? count($ratings) : 0 ?></h1>
-                            <h2 class="text-gray-500 mr-2">Ratings</h2>
-                            |
-                        </div> -->
-                        <div class="ml-2 flex gap-1 text-gray-400">
-                            <h1 class="link link-primary mr-1"><?php echo (int)$product_view['stock'] - (int)$product_view['available'] ?></h1>
-                            <h2 class="text-gray-500 mr-2">Sold</h2>
+                        <div class="text-gray-500 text-sm cursor-pointer">
                         </div>
                     </div>
-                    <div class="text-gray-500 text-sm cursor-pointer">
-                    </div>
-                </div>
-                <div class="px-3 flex flex-col gap-12">
-                    <div>
-                        <div class="flex gap-4 items-center mt-2">
-                            <h1 class="line-through text-gray-500 text-lg">₱<?php echo number_format($product_view['price']) ?>.00</h1>
-                            <h1 class="text-primary text-3xl">₱<?php echo number_format(round((int)$product_view['price'] - ((int)$product_view['price'] * ((int)$product_view['discount']/100)))) ?>.00</h1>
-                            <span class="bg-primary rounded p-1 text-xs text-primary-content"><?php echo number_format($product_view['discount']) ?>% OFF</span>
-                        </div>
-                        <div class="grid grid-cols-4 mt-4 gap-y-5">
-                            <div class="flex items-center">
-                                <h1 class="text-gray-500 text-sm">Shop Vouchers</h1>
+                    <div class="px-3 flex flex-col gap-12">
+                        <div>
+                            <div class="flex gap-4 items-center mt-2">
+                                <h1 class="line-through text-gray-500 text-lg">₱<?php echo number_format($product_view['price']) ?>.00</h1>
+                                <h1 class="text-primary text-3xl">₱<?php echo number_format(round((int)$product_view['price'] - ((int)$product_view['price'] * ((int)$product_view['discount']/100)))) ?>.00</h1>
+                                <span class="bg-primary rounded p-1 text-xs text-primary-content"><?php echo number_format($product_view['discount']) ?>% OFF</span>
                             </div>
-                            <div class="col-span-3 w-full">
-                                <h1 class="rounded-md bg-base-200 text-sm text-primary w-[8em] p-1 text-center text-nowrap">₱<?php echo number_format(round((int)$product_view['price'] * ((int)$product_view['discount']/100))) ?> OFF</h1>
-                            </div>
-                            <div class="flex items-center">
-                                <h1 class="text-gray-500 text-sm">Seller</h1>
-                            </div>
-                            <div class="col-span-3 w-full">
-                                <h1 class="text-sm p-1"><?php echo $seller['name'] ?></h1>
-                            </div>
-                            <div>
-                                <h1 class="text-gray-500 text-sm">Quantity</h1>
-                            </div>
-                            <div class="col-span-3 flex items-center gap-2">
-                                <div class="flex items-center ">
-                                    <button type="button" onclick="document.getElementById('qty').value > 1 ? document.getElementById('qty').value-- : ''; document.getElementById('buy_button').href = './checkout.php?0=<?php echo $_GET['id'] ?>&qty0='+document.getElementById('qty').value" class="w-7 h-7 border border-gray-300 p-2">
-                                        <svg class="w-full h-full" enable-background="new 0 0 10 10" viewBox="0 0 10 10" x="0" y="0" class="shopee-svg-icon"><polygon points="4.5 4.5 3.5 4.5 0 4.5 0 5.5 3.5 5.5 4.5 5.5 10 5.5 10 4.5"></polygon></svg>
-                                    </button>
-                                    <input name="qty" id="qty" class="input input-sm border border-gray-300 h-7 max-w-[4em] rounded-none bg-neutral text-center" value="1" type="number" min="1" oninput="this.value <= 0 ? this.value = 1 : Math.abs(this.value); document.getElementById('buy_button').href = './checkout.php?0=<?php echo $_GET['id'] ?>&qty0='+this.value" />
-                                    <button type="button" onclick="document.getElementById('qty').value++; document.getElementById('buy_button').href = './checkout.php?0=<?php echo $_GET['id'] ?>&qty0='+document.getElementById('qty').value" class="w-7 h-7 border border-gray-300 p-2">
-                                        <svg class="w-full h-full" enable-background="new 0 0 10 10" viewBox="0 0 10 10" x="0" y="0" class="shopee-svg-icon icon-plus-sign"><polygon points="10 4.5 5.5 4.5 5.5 0 4.5 0 4.5 4.5 0 4.5 0 5.5 4.5 5.5 4.5 10 5.5 10 5.5 5.5 10 5.5"></polygon></svg>
-                                    </button>
+                            <div class="grid grid-cols-4 mt-4 gap-y-5">
+                                <div class="flex items-center">
+                                    <h1 class="text-gray-500 text-sm">Shop Vouchers</h1>
                                 </div>
-                                <h1 class="text-gray-400 text-sm"><?php echo $product_view['available'] ?> pieces available</h1>
+                                <div class="col-span-3 w-full">
+                                    <h1 class="rounded-md bg-base-200 text-sm text-primary w-[8em] p-1 text-center text-nowrap">₱<?php echo number_format(round((int)$product_view['price'] * ((int)$product_view['discount']/100))) ?> OFF</h1>
+                                </div>
+                                <div class="flex items-center">
+                                    <h1 class="text-gray-500 text-sm">Seller</h1>
+                                </div>
+                                <div class="col-span-3 w-full">
+                                    <h1 class="text-sm p-1"><?php echo $seller['name'] ?></h1>
+                                </div>
+                                <div>
+                                    <h1 class="text-gray-500 text-sm">Quantity</h1>
+                                </div>
+                                <div class="col-span-3 flex items-center gap-2">
+                                    <div class="flex items-center ">
+                                        <button type="button" onclick="document.getElementById('qty').value > 1 ? document.getElementById('qty').value-- : ''; document.getElementById('buy_button').href = './checkout.php?0=<?php echo $_GET['id'] ?>&qty0='+document.getElementById('qty').value" class="w-7 h-7 border border-gray-300 p-2">
+                                            <svg class="w-full h-full" enable-background="new 0 0 10 10" viewBox="0 0 10 10" x="0" y="0" class="shopee-svg-icon"><polygon points="4.5 4.5 3.5 4.5 0 4.5 0 5.5 3.5 5.5 4.5 5.5 10 5.5 10 4.5"></polygon></svg>
+                                        </button>
+                                        <input name="qty" id="qty" class="input input-sm border border-gray-300 h-7 max-w-[4em] rounded-none bg-neutral text-center" value="1" type="number" min="1" oninput="this.value <= 0 ? this.value = 1 : Math.abs(this.value); document.getElementById('buy_button').href = './checkout.php?0=<?php echo $_GET['id'] ?>&qty0='+this.value" />
+                                        <button type="button" onclick="document.getElementById('qty').value++; document.getElementById('buy_button').href = './checkout.php?0=<?php echo $_GET['id'] ?>&qty0='+document.getElementById('qty').value" class="w-7 h-7 border border-gray-300 p-2">
+                                            <svg class="w-full h-full" enable-background="new 0 0 10 10" viewBox="0 0 10 10" x="0" y="0" class="shopee-svg-icon icon-plus-sign"><polygon points="10 4.5 5.5 4.5 5.5 0 4.5 0 4.5 4.5 0 4.5 0 5.5 4.5 5.5 4.5 10 5.5 10 5.5 5.5 10 5.5"></polygon></svg>
+                                        </button>
+                                    </div>
+                                    <h1 class="text-gray-400 text-sm"><?php echo $product_view['available'] ?> pieces available</h1>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="flex gap-4 mt-4">
+                        <div class="flex gap-4 mt-4">
                             <input type="hidden" name="id" value="<?php echo $_GET['id'] ?>">
-                            <input type="hidden" name="buyer" value="<?php echo $user['name'] ?>">
+                            <input type="hidden" name="buyer_id" value="<?php echo $user['id'] ?>">
                             <?php
                                 if (isset($_SESSION['user_id'])) {
                                     echo '
@@ -170,21 +177,23 @@
                                             <svg class="w-5 h-5 " viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="hsl(var(--p))"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>cart_plus_round [#1158]</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Dribbble-Light-Preview" transform="translate(-100.000000, -3039.000000)" fill="hsl(var(--p))"> <g id="icons" transform="translate(56.000000, 160.000000)"> <path d="M49.0001956,2883 C49.5521956,2883 50.0001956,2883.448 50.0001956,2884 C50.0001956,2884.552 49.5521956,2885 49.0001956,2885 L48.0001956,2885 L48.0001956,2886 C48.0001956,2886.552 47.5521956,2887 47.0001956,2887 C46.4481956,2887 46.0001956,2886.552 46.0001956,2886 L46.0001956,2885 L45.0001956,2885 C44.4481956,2885 44.0001956,2884.552 44.0001956,2884 C44.0001956,2883.448 44.4481956,2883 45.0001956,2883 L46.0001956,2883 L46.0001956,2882 C46.0001956,2881.448 46.4481956,2881 47.0001956,2881 C47.5521956,2881 48.0001956,2881.448 48.0001956,2882 L48.0001956,2883 L49.0001956,2883 Z M59.0001956,2897 C58.4491956,2897 58.0001956,2896.551 58.0001956,2896 C58.0001956,2895.339 58.4531956,2895.145 59.0001956,2894.951 C59.5471956,2895.145 60.0001956,2895.339 60.0001956,2896 C60.0001956,2896.551 59.5511956,2897 59.0001956,2897 L59.0001956,2897 Z M47.0001956,2897 C46.4491956,2897 46.0001956,2896.551 46.0001956,2896 C46.0001956,2895.339 46.4531956,2895.145 47.0001956,2894.951 C47.5471956,2895.145 48.0001956,2895.339 48.0001956,2896 C48.0001956,2896.551 47.5511956,2897 47.0001956,2897 L47.0001956,2897 Z M60.0001956,2882 C60.0001956,2881.448 60.4481956,2881 61.0001956,2881 L63.0001956,2881 C63.5521956,2881 64.0001956,2880.552 64.0001956,2880 C64.0001956,2879.448 63.5521956,2879 63.0001956,2879 L60.0001956,2879 C58.8951956,2879 58.0001956,2879.895 58.0001956,2881 L58.0001956,2891 L48.0001956,2891 C46.8951956,2891 46.0001956,2891.895 46.0001956,2893 L46.0001956,2893.184 C44.6631956,2893.659 43.7561956,2895.041 44.0581956,2896.6 C44.2871956,2897.777 45.2561956,2898.734 46.4361956,2898.948 C48.3411956,2899.295 50.0001956,2897.842 50.0001956,2896 C50.0001956,2894.696 49.1631956,2893.597 48.0001956,2893.184 L48.0001956,2893 L58.0001956,2893 L58.0001956,2893.184 C56.6631956,2893.659 55.7561956,2895.041 56.0581956,2896.6 C56.2871956,2897.777 57.2561956,2898.734 58.4361956,2898.948 C60.3411956,2899.295 62.0001956,2897.842 62.0001956,2896 C62.0001956,2894.696 61.1631956,2893.597 60.0001956,2893.184 L60.0001956,2882 Z" id="cart_plus_round-[#1158]"> </path> </g> </g> </g> </g></svg>
                                             <h1>Add to cart</h1>
                                         </button>
+
+                                        
                                     ';
                                 } else {
                                     echo '
-                                        <a href="/agrilink/login.php" class="cursor-pointer flex items-center gap-2 bg-base-100 hover:bg-base-200 h-12 px-4 text-primary font-semibold border border-primary rounded">
+                                        <a href="/AgriLink/login.php" class="cursor-pointer flex items-center gap-2 bg-base-100 hover:bg-base-200 h-12 px-4 text-primary font-semibold border border-primary rounded">
                                             <svg class="w-5 h-5 " viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="hsl(var(--p))"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>cart_plus_round [#1158]</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Dribbble-Light-Preview" transform="translate(-100.000000, -3039.000000)" fill="hsl(var(--p))"> <g id="icons" transform="translate(56.000000, 160.000000)"> <path d="M49.0001956,2883 C49.5521956,2883 50.0001956,2883.448 50.0001956,2884 C50.0001956,2884.552 49.5521956,2885 49.0001956,2885 L48.0001956,2885 L48.0001956,2886 C48.0001956,2886.552 47.5521956,2887 47.0001956,2887 C46.4481956,2887 46.0001956,2886.552 46.0001956,2886 L46.0001956,2885 L45.0001956,2885 C44.4481956,2885 44.0001956,2884.552 44.0001956,2884 C44.0001956,2883.448 44.4481956,2883 45.0001956,2883 L46.0001956,2883 L46.0001956,2882 C46.0001956,2881.448 46.4481956,2881 47.0001956,2881 C47.5521956,2881 48.0001956,2881.448 48.0001956,2882 L48.0001956,2883 L49.0001956,2883 Z M59.0001956,2897 C58.4491956,2897 58.0001956,2896.551 58.0001956,2896 C58.0001956,2895.339 58.4531956,2895.145 59.0001956,2894.951 C59.5471956,2895.145 60.0001956,2895.339 60.0001956,2896 C60.0001956,2896.551 59.5511956,2897 59.0001956,2897 L59.0001956,2897 Z M47.0001956,2897 C46.4491956,2897 46.0001956,2896.551 46.0001956,2896 C46.0001956,2895.339 46.4531956,2895.145 47.0001956,2894.951 C47.5471956,2895.145 48.0001956,2895.339 48.0001956,2896 C48.0001956,2896.551 47.5511956,2897 47.0001956,2897 L47.0001956,2897 Z M60.0001956,2882 C60.0001956,2881.448 60.4481956,2881 61.0001956,2881 L63.0001956,2881 C63.5521956,2881 64.0001956,2880.552 64.0001956,2880 C64.0001956,2879.448 63.5521956,2879 63.0001956,2879 L60.0001956,2879 C58.8951956,2879 58.0001956,2879.895 58.0001956,2881 L58.0001956,2891 L48.0001956,2891 C46.8951956,2891 46.0001956,2891.895 46.0001956,2893 L46.0001956,2893.184 C44.6631956,2893.659 43.7561956,2895.041 44.0581956,2896.6 C44.2871956,2897.777 45.2561956,2898.734 46.4361956,2898.948 C48.3411956,2899.295 50.0001956,2897.842 50.0001956,2896 C50.0001956,2894.696 49.1631956,2893.597 48.0001956,2893.184 L48.0001956,2893 L58.0001956,2893 L58.0001956,2893.184 C56.6631956,2893.659 55.7561956,2895.041 56.0581956,2896.6 C56.2871956,2897.777 57.2561956,2898.734 58.4361956,2898.948 C60.3411956,2899.295 62.0001956,2897.842 62.0001956,2896 C62.0001956,2894.696 61.1631956,2893.597 60.0001956,2893.184 L60.0001956,2882 Z" id="cart_plus_round-[#1158]"> </path> </g> </g> </g> </g></svg>
                                             <h1>Add to cart</h1>
                                         </a>
                                     ';
                                 }
                             ?>
-                        <a href="./checkout.php?0=<?php echo $_GET['id'] ?>&qty0=1" id="buy_button" class="cursor-pointer flex items-center gap-2 bg-primary hover:bg-primary-focus h-12 px-4 text-primary-content text-center font-semibold rounded">
-                            <h1>Buy Now</h1>
-                        </a>
+                            <a href="./checkout.php?0=<?php echo $_GET['id'] ?>&qty0=1" id="buy_button" class="cursor-pointer flex items-center gap-2 bg-primary hover:bg-primary-focus h-12 px-4 text-primary-content text-center font-semibold rounded">
+                                <h1>Buy Now</h1>
+                            </a>
+                        </div>
                     </div>
-                </div>
                 </form>
             </div>
             <div class="pt-20 pl-10 col-span-2">
@@ -268,6 +277,7 @@
             </div>
         </div> -->
         <!-- END OF FEEDBACK -->
+
         <div class="my-10">
             <div class="flex items-center">
                 <h1 class="font-bold opacity-80">SIMILAR PRODUCT</h1>
@@ -284,14 +294,14 @@
                                 echo '
                                     <div class="flex flex-col justify-center items-center w-full gap-1 bg-neutral">
                                         <div class="w-full aspect-square bg-gray-300 rounded-t-lg overflow-hidden">
-                                            <img src="/agrilink/assets/products/'.$records[$i]['image'].'" class="w-full h-full object-cover" />
+                                            <img src="/AgriLink/assets/products/'.$records[$i]['image'].'" class="w-full h-full object-cover" />
                                         </div>
                                         <h1 class="text-sm font-bold text-neutral-content break-words text-center">'.(strlen($records[$i]['name']) <= 17 ? $records[$i]['name'] : substr($records[$i]['name'], 0, 17)."...").'</h1>
                                         <div class="w-full flex justify-between font-semibold items-center px-2">
                                             <p class="text-primary">₱'.number_format(round((int)$records[$i]['price'] - ((int)$records[$i]['price']*((int)$records[$i]['discount'])/100))).'.00</p>
                                             <span class="text-neutral-content opacity-70 text-xs">'.((int)$records[$i]['stock'] - (int)$records[$i]['available']).' sold</span>
                                         </div>
-                                        <a href="/agrilink/product.php?id='.$records[$i]['id'].'" class="rounded-t-none btn btn-primary btn-sm col-span-2 w-full">View Product</a>
+                                        <a href="/AgriLink/product.php?id='.$records[$i]['id'].'" class="rounded-t-none btn btn-primary btn-sm col-span-2 w-full">View Product</a>
                                     </div>
                                 ';
                             }
@@ -306,6 +316,7 @@
     <?php
         include './components/footer.php';
     ?>
-    <!-- END OF FOOTER -
+    <!-- END OF FOOTER -->
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
 </body>
 </html>

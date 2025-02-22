@@ -16,12 +16,12 @@
     <?php
         require "./helpers/crud.php";
         if (!isset($_SESSION['user_id'])) {
-            header("Location: /agrilink/login.php");
+            header("Location: /AgriLink/login.php");
         }
         include "./components/navbar.php";
     ?>
 
-    <form action="/agrilink/modules/checkout.php" method="post">
+    <form action="/AgriLink/modules/checkout.php" method="post">
     <div class="max-w-[965px] mx-auto pt-5 pb-96">
         <h1 class="font-bold text-3xl text-center text-neutral-content py-5">Checkout</h1>
         <div class="w-full relative bg-neutral px-5 py-8 rounded mb-5">
@@ -38,7 +38,7 @@
             <div class="flex items-center gap-5">
                 <h1 class="font-bold"><?php echo $user['name'] . " " . $user['phone'] ?></h1>
                 <h1><?php echo $user['address'] ?></h1>
-                <a href="/agrilink/user.php?page=account" class="text-blue-500 text-sm cursor-pointer">Change</a>
+                <a href="/AgriLink/user.php?page=account" class="text-blue-500 text-sm cursor-pointer">Change</a>
             </div>
         </div>
 
@@ -53,12 +53,12 @@
                     <div class="flex items-center border-b border-gray-200 pb-3">
                         <div class="flex items-center gap-2">
                             <h1 class="font-bold text-xs">'.$checkout_product['type'].'</h1>
-                            <a href="/agrilink/product.php?id='.$records[$i].'" class="btn btn-xs btn-neutral border border-gray-300">View Product</a>
+                            <a href="/AgriLink/product.php?id='.$records[$i].'" class="btn btn-xs btn-neutral border border-gray-300">View Product</a>
                         </div>
                     </div>
                     <div class="flex items-center justify-between py-4">
                         <div class="flex items-center gap-4">
-                            <img src="/agrilink/assets/products/'.$checkout_product['image'].'" class="w-24 h-24 rounded">
+                            <img src="/AgriLink/assets/products/'.$checkout_product['image'].'" class="w-24 h-24 rounded">
                             <div>
                                 <div class="font-semibold mb-1">'.$checkout_product['name'].'</div>
                             </div>

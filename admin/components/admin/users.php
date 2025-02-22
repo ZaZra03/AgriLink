@@ -36,6 +36,9 @@
                         Verification ID
                     </th>
                     <th scope="col" class="px-6 py-3">
+                        Business Permit
+                    </th>
+                    <th scope="col" class="px-6 py-3">
                         Action
                     </th>
                 </tr>
@@ -97,7 +100,7 @@
                                     <!-- TABLE ROW -->
                                     <tr class="bg-white border-b hover:bg-gray-50">
                                         <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap :text-white">
-                                            <img class="w-10 h-10 rounded-full" src="'.($record['image'] ? '/agrilink/assets/users/'.$record['image'] : "/agrilink/assets/images/default_avatar.png").'" alt="Jese image">
+                                            <img class="w-10 h-10 rounded-full" src="'.($record['image'] ? '/AgriLink/assets/users/'.$record['image'] : "/AgriLink/assets/images/default_avatar.png").'" alt="Jese image">
                                             <div class="pl-3">
                                                 <div class="text-base font-semibold">'.$record['name'].'</div>
                                                 <div class="font-normal text-gray-500">'.$record['email'].'</div>
@@ -114,6 +117,12 @@
                                         <td class="px-6 py-4">
                                             '.(
                                                 $record['id_image'] ? '<a class="text-center font-bold hover:text-blue-400" href="#" data-modal-target="id-image-modal'.$record['id'].'" data-modal-toggle="id-image-modal'.$record['id'].'">View</a>'
+                                                : ''
+                                            ).'
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            '.(
+                                                $record['business_permit'] ? '<a class="text-center font-bold hover:text-blue-400" href="#" data-modal-target="id-image-modal'.$record['id'].'" data-modal-toggle="id-image-modal'.$record['id'].'">View</a>'
                                                 : ''
                                             ).'
                                         </td>
@@ -147,13 +156,13 @@
                                                             <span class="sr-only">Close modal</span> 
                                                         </button>
                                                     </div>
-                                                    <form action="/agrilink/modules/add/add_refund.php" method="post" enctype="multipart/form-data">
+                                                    <form action="/AgriLink/modules/add/add_refund.php" method="post" enctype="multipart/form-data">
                                                         <input type="hidden" name="" value="" />
                                                         <div class="grid gap-3">
                                                             <div class="p-6">
                                                                 <div class="flex gap-2 items-center justify-between"><div>
                                                                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image</label>
-                                                                    <img class="w-44" src="/agrilink/assets/id/'.$record['id_image'].'" />
+                                                                    <img class="w-44" src="/AgriLink/assets/id/'.$record['id_image'].'" />
                                                                 </div>
                                                             </div>
                                                         </div>

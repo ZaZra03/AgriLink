@@ -27,7 +27,7 @@
                                     <div class="flex items-center justify-between border-b border-gray-200 pb-3">
                                         <div class="flex items-center gap-2">
                                             <h1 class="font-bold text-xs">'.$checkout_prod['type'].'</h1>
-                                            <a href="/agrilink/product.php?id='.$checkout_prod['id'].'" class="btn btn-xs btn-neutral border border-gray-300">View Product</a>
+                                            <a href="/AgriLink/product.php?id='.$checkout_prod['id'].'" class="btn btn-xs btn-neutral border border-gray-300">View Product</a>
                                         </div>';
 
                                         switch($record['status']) {
@@ -81,7 +81,7 @@
 
                                 echo '</div>
                                     <div class="flex items-center py-4 gap-4 border-b border-gray-200">
-                                        <img src="/agrilink/assets/products/'.$checkout_prod['image'].'" class="w-24 h-24 rounded object-cover">
+                                        <img src="/AgriLink/assets/products/'.$checkout_prod['image'].'" class="w-24 h-24 rounded object-cover">
                                         <div>
                                             <div class="font-semibold mb-1">'.$checkout_prod['name'].'</div>
                                             <span class="text-sm">x'.$record['qty'].'</span>
@@ -92,7 +92,7 @@
                                             Order Total: <span class="text-primary text-2xl">₱'.number_format((int)$record['total']).'.00</span>
                                         </h1>
                                         <!-- <div class="flex items-center gap-2">
-                                            <a href="/agrilink/product.php?id='.$record['product_id'].'" class="btn btn-sm btn-primary w-32 h-10">Buy Again</a>
+                                            <a href="/AgriLink/product.php?id='.$record['product_id'].'" class="btn btn-sm btn-primary w-32 h-10">Buy Again</a>
                                         </div> -->
                                     </div>
                                 </div>';
@@ -121,7 +121,7 @@
                                         <div class="flex items-center justify-between border-b border-gray-200 pb-3">
                                             <div class="flex items-center gap-2">
                                                 <h1 class="font-bold text-xs">'.$checkout_prod['type'].'</h1>
-                                                <a href="/agrilink/product.php?id='.$checkout_prod['id'].'" class="btn btn-xs btn-neutral border border-gray-300">View Product</a>
+                                                <a href="/AgriLink/product.php?id='.$checkout_prod['id'].'" class="btn btn-xs btn-neutral border border-gray-300">View Product</a>
                                             </div>
                                             <div class="flex items-center">
                                                 <div class="flex items-center text-success font-semibold text-sm pr-2 mr-2 border-r border-gray-300">
@@ -132,7 +132,7 @@
                                             </div>
                                         </div>
                                         <div class="flex items-center py-4 gap-4 border-b border-gray-200">
-                                            <img src="/agrilink/assets/products/'.$checkout_prod['image'].'" class="w-24 h-24 rounded object-cover">
+                                            <img src="/AgriLink/assets/products/'.$checkout_prod['image'].'" class="w-24 h-24 rounded object-cover">
                                             <div>
                                                 <div class="font-semibold mb-1">'.$checkout_prod['name'].'</div>
                                                 <span class="text-sm">x'.$record['qty'].'</span>
@@ -143,7 +143,7 @@
                                                 Order Total: <span class="text-primary text-2xl">₱'.number_format((int)$record['total']).'.00</span>
                                             </h1>
                                             <div class="flex items-center gap-2">
-                                                <a href="/agrilink/modules/cancel_order.php?id='.$record['id'].'" class="btn btn-sm btn-neutral border border-gray-200 w-32 h-10">Cancel order</a>
+                                                <a href="/AgriLink/modules/cancel_order.php?id='.$record['id'].'" class="btn btn-sm btn-neutral border border-gray-200 w-32 h-10">Cancel order</a>
                                             </div>
                                         </div>
                                     </div>';
@@ -183,7 +183,7 @@
                                         <div class="flex items-center justify-between border-b border-gray-200 pb-3">
                                             <div class="flex items-center gap-2">
                                                 <h1 class="font-bold text-xs">'.$checkout_prod['type'].'</h1>
-                                                <a href="/agrilink/product.php?id='.$checkout_prod['id'].'" class="btn btn-xs btn-neutral border border-gray-300">View Product</a>
+                                                <a href="/AgriLink/product.php?id='.$checkout_prod['id'].'" class="btn btn-xs btn-neutral border border-gray-300">View Product</a>
                                             </div>
                                             <div class="flex items-center">
                                                 <div class="flex items-center text-success font-semibold text-sm pr-2 mr-2 border-r border-gray-300">
@@ -194,7 +194,7 @@
                                             </div>
                                         </div>
                                         <div class="flex items-center py-4 gap-4 border-b border-gray-200">
-                                            <img src="/agrilink/assets/products/'.$checkout_prod['image'].'" class="w-24 h-24 rounded object-cover">
+                                            <img src="/AgriLink/assets/products/'.$checkout_prod['image'].'" class="w-24 h-24 rounded object-cover">
                                             <div>
                                                 <div class="font-semibold mb-1">'.$checkout_prod['name'].'</div>
                                                 <span class="text-sm">x'.$record['qty'].'</span>
@@ -205,7 +205,7 @@
                                                 Order Total: <span class="text-primary text-2xl">₱'.number_format((int)$record['total']).'.00</span>
                                             </h1>
                                             <!-- <div class="flex items-center gap-2">
-                                                <a href="/agrilink/product.php?id='.$record['product_id'].'" class="btn btn-sm btn-primary w-32 h-10">Buy Again</a>
+                                                <a href="/AgriLink/product.php?id='.$record['product_id'].'" class="btn btn-sm btn-primary w-32 h-10">Buy Again</a>
                                             </div> -->
                                         </div>
                                     </div>';
@@ -245,7 +245,7 @@
                                         <div class="flex items-center justify-between border-b border-gray-200 pb-3">
                                             <div class="flex items-center gap-2">
                                                 <h1 class="font-bold text-xs">'.$checkout_prod['type'].'</h1>
-                                                <a href="/agrilink/product.php?id='.$checkout_prod['id'].'" class="btn btn-xs btn-neutral border border-gray-300">View Product</a>
+                                                <a href="/AgriLink/product.php?id='.$checkout_prod['id'].'" class="btn btn-xs btn-neutral border border-gray-300">View Product</a>
                                             </div>
                                             <div class="flex items-center">
                                                 <div class="flex items-center text-success font-semibold text-sm pr-2 mr-2 border-r border-gray-300">
@@ -256,7 +256,7 @@
                                             </div>
                                         </div>
                                         <div class="flex items-center py-4 gap-4 border-b border-gray-200">
-                                            <img src="/agrilink/assets/products/'.$checkout_prod['image'].'" class="w-24 h-24 rounded object-cover">
+                                            <img src="/AgriLink/assets/products/'.$checkout_prod['image'].'" class="w-24 h-24 rounded object-cover">
                                             <div>
                                                 <div class="font-semibold mb-1">'.$checkout_prod['name'].'</div>
                                                 <span class="text-sm">x'.$record['qty'].'</span>
@@ -267,7 +267,7 @@
                                                 Order Total: <span class="text-primary text-2xl">₱'.number_format((int)$record['total']).'.00</span>
                                             </h1>
                                             <!-- <div class="flex items-center gap-2">
-                                                <a href="/agrilink/product.php?id='.$record['product_id'].'" class="btn btn-sm btn-primary w-32 h-10">Buy Again</a>
+                                                <a href="/AgriLink/product.php?id='.$record['product_id'].'" class="btn btn-sm btn-primary w-32 h-10">Buy Again</a>
                                             </div> -->
                                         </div>
                                     </div>';
@@ -305,7 +305,7 @@
                                         <div class="flex items-center justify-between border-b border-gray-200 pb-3">
                                             <div class="flex items-center gap-2">
                                                 <h1 class="font-bold text-xs">'.$checkout_prod['type'].'</h1>
-                                                <a href="/agrilink/product.php?id='.$checkout_prod['id'].'" class="btn btn-xs btn-neutral border border-gray-300">View Product</a>
+                                                <a href="/AgriLink/product.php?id='.$checkout_prod['id'].'" class="btn btn-xs btn-neutral border border-gray-300">View Product</a>
                                             </div>
                                             <div class="flex items-center">
                                                 <div class="flex items-center text-success font-semibold text-sm pr-2 mr-2 border-r border-gray-300">
@@ -316,7 +316,7 @@
                                             </div>
                                         </div>
                                         <div class="flex items-center py-4 gap-4 border-b border-gray-200">
-                                            <img src="/agrilink/assets/products/'.$checkout_prod['image'].'" class="w-24 h-24 rounded object-cover">
+                                            <img src="/AgriLink/assets/products/'.$checkout_prod['image'].'" class="w-24 h-24 rounded object-cover">
                                             <div>
                                                 <div class="font-semibold mb-1">'.$checkout_prod['name'].'</div>
                                                 <span class="text-sm">x'.$record['qty'].'</span>
@@ -331,7 +331,7 @@
                                                     <a data-modal-target="refund-modal'.$record['id'].'" data-modal-toggle="refund-modal'.$record['id'].'" class="btn btn-sm w-32 h-10">Request Refund</a>
                                                 </div>
                                                 <div class="flex items-center gap-2">
-                                                    <a href="/agrilink/product.php?id='.$record['product_id'].'" class="btn btn-sm btn-primary w-32 h-10">Buy Again</a>
+                                                    <a href="/AgriLink/product.php?id='.$record['product_id'].'" class="btn btn-sm btn-primary w-32 h-10">Buy Again</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -373,14 +373,14 @@
                                         <div class="flex items-center justify-between border-b border-gray-200 pb-3">
                                             <div class="flex items-center gap-2">
                                                 <h1 class="font-bold text-xs">'.$checkout_prod['type'].'</h1>
-                                                <a href="/agrilink/product.php?id='.$checkout_prod['id'].'" class="btn btn-xs btn-neutral border border-gray-300">View Product</a>
+                                                <a href="/AgriLink/product.php?id='.$checkout_prod['id'].'" class="btn btn-xs btn-neutral border border-gray-300">View Product</a>
                                             </div>
                                             <div class="flex items-center">
                                                 <h1 class="text-primary text-sm font-semibold">CANCELLED</h1>
                                             </div>
                                         </div>
                                         <div class="flex items-center py-4 gap-4 border-b border-gray-200">
-                                            <img src="/agrilink/assets/products/'.$checkout_prod['image'].'" class="w-24 h-24 rounded object-cover">
+                                            <img src="/AgriLink/assets/products/'.$checkout_prod['image'].'" class="w-24 h-24 rounded object-cover">
                                             <div>
                                                 <div class="font-semibold mb-1">'.$checkout_prod['name'].'</div>
                                                 <span class="text-sm">x'.$record['qty'].'</span>
@@ -391,7 +391,7 @@
                                                 Order Total: <span class="text-primary text-2xl">₱'.number_format((int)$record['total']).'.00</span>
                                             </h1>
                                             <!-- <div class="flex items-center gap-2">
-                                                <a href="/agrilink/product.php?id='.$record['product_id'].'" class="btn btn-sm btn-primary w-32 h-10">Buy Again</a>
+                                                <a href="/AgriLink/product.php?id='.$record['product_id'].'" class="btn btn-sm btn-primary w-32 h-10">Buy Again</a>
                                             </div> -->
                                         </div>
                                     </div>';
@@ -432,7 +432,7 @@
                                         <div class="flex items-center justify-between border-b border-gray-200 pb-3">
                                             <div class="flex items-center gap-2">
                                                 <h1 class="font-bold text-xs">'.$checkout_prod['type'].'</h1>
-                                                <a href="/agrilink/product.php?id='.$checkout_prod['id'].'" class="btn btn-xs btn-neutral border border-gray-300">View Product</a>
+                                                <a href="/AgriLink/product.php?id='.$checkout_prod['id'].'" class="btn btn-xs btn-neutral border border-gray-300">View Product</a>
                                             </div>
                                             <div class="flex items-center">
                                                 <div class="flex items-center text-success font-semibold text-sm pr-2 mr-2 border-r border-gray-300">
@@ -443,7 +443,7 @@
                                             </div>
                                         </div>
                                         <div class="flex items-center py-4 gap-4 border-b border-gray-200">
-                                            <img src="/agrilink/assets/products/'.$checkout_prod['image'].'" class="w-24 h-24 rounded object-cover">
+                                            <img src="/AgriLink/assets/products/'.$checkout_prod['image'].'" class="w-24 h-24 rounded object-cover">
                                             <div>
                                                 <div class="font-semibold mb-1">'.$checkout_prod['name'].'</div>
                                                 <span class="text-sm">x'.$record['qty'].'</span>
@@ -488,7 +488,7 @@
                                 <div class="flex items-center justify-between border-b border-gray-200 pb-3">
                                     <div class="flex items-center gap-2">
                                         <h1 class="font-bold text-xs">'.$checkout_prod['type'].'</h1>
-                                        <a href="/agrilink/product.php?id='.$checkout_prod['id'].'" class="btn btn-xs btn-neutral border border-gray-300">View Product</a>
+                                        <a href="/AgriLink/product.php?id='.$checkout_prod['id'].'" class="btn btn-xs btn-neutral border border-gray-300">View Product</a>
                                     </div>';
 
                                     switch($record['status']) {
@@ -542,7 +542,7 @@
 
                             echo '</div>
                                 <div class="flex items-center py-4 gap-4 border-b border-gray-200">
-                                    <img src="/agrilink/assets/products/'.$checkout_prod['image'].'" class="w-24 h-24 rounded object-cover">
+                                    <img src="/AgriLink/assets/products/'.$checkout_prod['image'].'" class="w-24 h-24 rounded object-cover">
                                     <div>
                                         <div class="font-semibold mb-1">'.$checkout_prod['name'].'</div>
                                         <span class="text-sm">x'.$record['qty'].'</span>
@@ -553,7 +553,7 @@
                                         Order Total: <span class="text-primary text-2xl">₱'.number_format((int)$record['total']).'.00</span>
                                     </h1>
                                     <div class="flex items-center gap-2">
-                                        <a href="/agrilink/product.php?id='.$record['product_id'].'" class="btn btn-sm btn-primary w-32 h-10">Buy Again</a>
+                                        <a href="/AgriLink/product.php?id='.$record['product_id'].'" class="btn btn-sm btn-primary w-32 h-10">Buy Again</a>
                                     </div>
                                 </div>
                             </div>';

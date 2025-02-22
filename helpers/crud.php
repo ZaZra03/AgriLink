@@ -105,7 +105,7 @@ class Crud {
         }
         
         $stmt = $this->pdo->prepare("SELECT * FROM $table WHERE $selected_term ORDER BY id DESC");
-        $stmt->bindValue(':search_term', "%$search_term%", PDO::PARAM_STR);
+        $stmt->bindValue(':search_term', "$search_term", PDO::PARAM_STR);
         $stmt->execute();
     
         $records = $stmt->fetchAll(PDO::FETCH_ASSOC);

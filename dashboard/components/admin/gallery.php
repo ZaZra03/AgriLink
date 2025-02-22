@@ -34,7 +34,7 @@
             <div class="grid grid-cols-2 gap-5 mb-4">
                 <div class="flex flex-col items-center bg-neutral border border-gray-200 rounded-lg relative shadow hover:bg-neutral-focus :border-neutral-content :bg-gray-800 :hover:bg-neutral-content">
                     <a href="?page=gallery&album=sale" class="flex flex-col items-center w-full">
-                        <img class="object-cover w-full rounded-t-lg h-56" src="'.($crud->search("gallery", "sale", ["album"]) ? $crud->search("gallery", "sale", ["album"])[0]['image'] : "/agrilink/assets/images/default.jpg").'" alt="">
+                        <img class="object-cover w-full rounded-t-lg h-56" src="'.($crud->search("gallery", "sale", ["album"]) ? $crud->search("gallery", "sale", ["album"])[0]['image'] : "/AgriLink/assets/images/default.jpg").'" alt="">
                         <div class="flex flex-col justify-between p-4 leading-normal">
                             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 :text-white">Sale</h5>
                             <p class="mb-3 font-normal text-neutral-content :text-gray-400">Description</p>
@@ -43,7 +43,7 @@
                 </div>
                 <div class="flex flex-col items-center bg-neutral border border-gray-200 rounded-lg relative shadow hover:bg-neutral-focus :border-neutral-content :bg-gray-800 :hover:bg-neutral-content">
                     <a href="?page=gallery&album=carousel" class="flex flex-col items-center w-full">
-                        <img class="object-cover w-full rounded-t-lg h-56" src="'.($crud->search("gallery", "carousel", ["album"]) ? $crud->search("gallery", "carousel", ["album"])[0]['image'] : "/agrilink/assets/images/default.jpg").'" alt="">
+                        <img class="object-cover w-full rounded-t-lg h-56" src="'.($crud->search("gallery", "carousel", ["album"]) ? $crud->search("gallery", "carousel", ["album"])[0]['image'] : "/AgriLink/assets/images/default.jpg").'" alt="">
                         <div class="flex flex-col justify-between p-4 leading-normal">
                             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 :text-white">Carousel</h5>
                             <p class="mb-3 font-normal text-neutral-content :text-gray-400">Description</p>
@@ -110,7 +110,7 @@
                             if (count($records)<2) {
                                 echo '
                                 <button class="relative" type="button">
-                                    <form action="/agrilink/modules/add/add_gallery.php" method="post" enctype="multipart/form-data">
+                                    <form action="/AgriLink/modules/add/add_gallery.php" method="post" enctype="multipart/form-data">
                                         <input onchange="this.form.submit()" type="file" name="image" class="w-full h-full absolute top-0 left-0 opacity-0 cursor-pointer" />
                                         <input type="hidden" name="table" value="gallery">
                                         <input type="hidden" name="album" value="'.$_GET['album'].'">
@@ -141,7 +141,7 @@
                             if ($i == 1 && count($records)<2) {
                                 echo '
                                 <button class="relative" type="button">
-                                    <form action="/agrilink/modules/add/add_gallery.php" method="post" enctype="multipart/form-data">
+                                    <form action="/AgriLink/modules/add/add_gallery.php" method="post" enctype="multipart/form-data">
                                         <input onchange="this.form.submit()" type="file" name="image" class="w-full h-full absolute top-0 left-0 opacity-0 cursor-pointer" />
                                         <input type="hidden" name="table" value="gallery">
                                         <input type="hidden" name="album" value="'.$_GET['album'].'">
@@ -155,7 +155,7 @@
                             } else if (count($records)<3 && $i == 2) {
                                 echo '
                                 <button class="relative" type="button">
-                                    <form action="/agrilink/modules/add/add_gallery.php" method="post" enctype="multipart/form-data">
+                                    <form action="/AgriLink/modules/add/add_gallery.php" method="post" enctype="multipart/form-data">
                                         <input onchange="this.form.submit()" type="file" name="image" class="w-full h-full absolute top-0 left-0 opacity-0 cursor-pointer" />
                                         <input type="hidden" name="table" value="gallery">
                                         <input type="hidden" name="album" value="'.$_GET['album'].'">
@@ -174,7 +174,7 @@
                 } else {
                     echo '
                         <button class="relative" type="button">
-                            <form action="/agrilink/modules/add/add_gallery.php" method="post" enctype="multipart/form-data">
+                            <form action="/AgriLink/modules/add/add_gallery.php" method="post" enctype="multipart/form-data">
                                 <input onchange="this.form.submit()" type="file" name="image" class="w-full h-full absolute top-0 left-0 opacity-0 cursor-pointer" />
                                 <input type="hidden" name="table" value="gallery">
                                 <input type="hidden" name="album" value="'.$_GET['album'].'">

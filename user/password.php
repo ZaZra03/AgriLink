@@ -55,7 +55,7 @@
         <p class="text-sm opacity-90">Manage account profile</p>
         <hr class="my-4">
     </div>
-    <form action="/agrilink/modules/update/update_password.php" method="post">
+    <form action="/AgriLink/modules/update/update_password.php" method="post">
         <input type="hidden" name="id" value="<?php echo $user['id'] ?>">
         <div class="w-full grid px-6">
             <div class="">

@@ -25,5 +25,5 @@
         "album" => $_POST['album'],
     ];
     $crud->create($_POST['table'], $data);
-    header("Location: /agrilink/dashboard/admin.php?page=".$_POST['location']."");
+    header("Location: /AgriLink/dashboard/admin.php?page=".$_POST['location']."");
 ?>

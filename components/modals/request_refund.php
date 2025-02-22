@@ -15,7 +15,7 @@
                         </button>
                     </div>
                     <!-- Modal body -->
-                    <form action="/agrilink/modules/add/add_refund.php" method="post" enctype="multipart/form-data">
+                    <form action="/AgriLink/modules/add/add_refund.php" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="order_id" value="'.$record['id'].'" />
                         <input type="hidden" name="buyer_name" value="'.$current_user["name"].'" />
                         <div class="p-6 grid gap-3">

@@ -3,9 +3,9 @@
 
     if ($crud->read("user", $_POST['id'])['password'] == $_POST['old']) {
         $crud->update("user", $_POST['id'], ["password" => $_POST['new']]);
-        header("Location: /agrilink/user.php?page=password&status=success");
+        header("Location: /AgriLink/user.php?page=password&status=success");
     } else {
-        header("Location: /agrilink/user.php?page=password&status=error");
+        header("Location: /AgriLink/user.php?page=password&status=error");
     }
 
 ?>

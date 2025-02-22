@@ -20,7 +20,7 @@
     <?php
         require_once("../helpers/crud.php");
         if (!isset($_SESSION['role']) || $_SESSION['role'] !== "seller") {
-            header("Location: /agrilink/index.php");
+            header("Location: /AgriLink/index.php");
         }
         $user = $crud->read("user", $_SESSION['user_id']);
         include "./components/admin/nav.php";

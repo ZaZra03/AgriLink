@@ -74,7 +74,7 @@
                 <h2 class="text-2xl font-bold text-base-content :text-white">
                     Create an account as <span class="text-primary">Seller</span>
                 </h2>
-                <form class="space-y-6" action="/agrilink/modules/signup.php" method="post" enctype="multipart/form-data">
+                <form class="space-y-6" action="/AgriLink/modules/signup.php" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="role" value="seller" />
                     <div>
                         <label for="name" class="block mb-1 text-sm font-medium text-base-content :text-white">Name</label>
@@ -117,7 +117,7 @@
                         <button type="submit" class="btn btn-primary">Create account</button>
                     </div>
                     <div class="flex justify-center text-sm font-medium text-gray-500 :text-gray-400">
-                        Already have an account? <a href="/agrilink/login.php" class="text-primary hover:underline :text-primary-500 ml-1">Login</a>
+                        Already have an account? <a href="/AgriLink/login.php" class="text-primary hover:underline :text-primary-500 ml-1">Login</a>
                     </div>
                 </form>
             </div>

@@ -82,7 +82,7 @@
                             echo '
                                 <div class="flex flex-col justify-center items-center w-40 gap-1">
                                     <div class="w-40 h-40 rounded-lg">
-                                        <img class="w-full h-full object-cover rounded-t-lg" src="/agrilink/assets/products/'.$sale_prod[$i]['image'].'" />
+                                        <img class="w-full h-full object-cover rounded-t-lg" src="/AgriLink/assets/products/'.$sale_prod[$i]['image'].'" />
                                     </div>
                                     <h1 class="text-sm font-bold text-neutral-content text-center">'.(strlen($sale_prod[$i]['name']) <= 17 ? $sale_prod[$i]['name'] : substr($sale_prod[$i]['name'], 0, 17)."...").'</h1>
                                     <div class="w-full flex justify-between px-3 font-semibold items-start">
