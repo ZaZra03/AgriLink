@@ -5,8 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AgriLink</title>
-    <!-- <link href="https://cdn.jsdelivr.net/npm/daisyui@3.0.2/dist/full.css" rel="stylesheet" type="text/css" />
-    <script src="https://cdn.tailwindcss.com"></script> -->
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
     <script src="./javascript/tailwind.js"></script>
     <link rel="stylesheet" href="./assets/css/daisyui.css">
     <link rel="stylesheet" href="./assets/css/config.css">
@@ -30,7 +29,7 @@
         include "./components/navbar.php";
     ?>
 
-    <div class="max-w-[965px] mx-auto pt-5 pb-96">
+    <div class="max-w-[965px] mx-auto mt-[5%] pb-[30%]">
         <h1 class="font-bold text-3xl text-center text-neutral-content py-5">CART</h1>
         <form action="/AgriLink/modules/remove_cart.php" method="post" onkeydown="return event.key != 'Enter';">
         <?php
@@ -57,7 +56,7 @@
                                     </div>
                                     <div>
                                         <div class="font-semibold mb-1 w-36">'.$product['name'].'</div>
-                                        <span class="text-sm">x'.$record['qty'].'</span>
+                                        
                                     </div>
                                 </div>
                                 <div class="opacity-70 text-sm font-semibold">
@@ -66,7 +65,8 @@
                                 </div>
                                 <div class="flex items-center gap-3">
                                     <h1 class="line-through opacity-70 '.($product['discount'] > 0 ? "" : "hidden").'" id="'.$product['price'].'">₱'.$product['price'].'.00</h1>
-                                    <h1 class="font-semibold text-primary total" id="total'.$record['id'].'">₱'.round((int)$product['price'] - ((int)$product['price'] * ((int)$product['discount'])/100))*(int)$record['qty'].'.00</h1>
+                                    <h1 class="font-semibold text-primary total" id="total'.$record['id'].'">₱'.round(((int)$product['price'] - ((int)$product['price'] * (int)$product['discount'] / 100)) * (int)$record['qty']).'.00</h1>
+                                    <h1>'.round(((int)$product['price'] - ((int)$product['price'] * (int)$product['discount'] / 100)) * (int)$record['qty']).'</h1>
                                 </div>
                                 <div class="flex items-center ">
                                     <button type="button" name="decrement" class="w-7 h-7 border border-gray-300 p-2">
@@ -105,14 +105,14 @@
                     <h1 class="" id="items">Total item (<?php echo $records ? 1 : 0 ?>):</h1>
                     <span class="text-xl text-primary font-semibold" id="price">₱0.00</span>
                 </div>
-                <a href="" class="btn btn-primary w-36" id="check_out" <?php echo !$records ? "disabled" : "" ?>>Check out</a>
+                <a href="" class="btn btn-primary w-36" id="check_out" disabled>Check out</a>
             </div>
         </div>
         <div class="my-10">
             <div class="flex items-center">
-                <h1 class="font-bold opacity-80">YOU MAY ALSO LIKE</h1>
+                <h1 class="font-bold opacity-80 px-5">YOU MAY ALSO LIKE</h1>
             </div>
-            <div class="w-full grid grid-cols-5 py-4 gap-5">
+            <div class="w-full grid grid-cols-3 lg:grid-cols-5 px-5 py-4 gap-5">
 
                     <?php
                         $suggest  = $crud->read_all("product");
@@ -126,7 +126,7 @@
                                     <h1 class="text-sm font-bold text-neutral-content break-words text-center">'.(strlen($suggest[$i]['name']) <= 17 ? $suggest[$i]['name'] : substr($suggest[$i]['name'], 0, 17)."...").'</h1>
                                     <div class="w-full flex justify-between font-semibold items-center px-2">
                                         <p class="text-primary">₱'.number_format(round((int)$suggest[$i]['price'] - ((int)$suggest[$i]['price'] * ((int)$suggest[$i]['discount']/100)))).'.00</p>
-                                        <span class="text-neutral-content opacity-70 text-xs">'.((int)$suggest[$i]['stock'] - (int)$suggest[$i]['available']).' sold</span>
+                                        <span class="text-neutral-content opacity-70 text-xs">'.((int)$suggest[$i]['current_stock'] - (int)$suggest[$i]['available']).' sold</span>
                                     </div>
                                     <a href="./product.php?id='.$suggest[$i]['id'].'" class="rounded-t-none btn btn-primary btn-sm col-span-2 w-full">View Details</a>
                                 </div>
@@ -227,7 +227,7 @@
         document.getElementById("check_out").href = "/AgriLink/checkout.php?" + 0 + "=" + document.getElementsByName("foo[]")[0].value + "&qty0=" + document.getElementById("qty0").value;
         function toggle(source) {
             checkboxes = document.getElementsByName('foo[]');
-            for(var i=0, n=checkboxes.length;i<n;i++) {
+            for(var i = 0 ; i < checkboxes.length; i++) {
                 checkboxes[i].checked = source.checked;
                 let k = 0;
                 for (let j = 0; j < checkboxes.length; j++) {
@@ -236,8 +236,9 @@
                     }
                 } 
                 document.getElementById("items").innerHTML = "Total item ("+k+"):";
-                if(k < 1) {
+                if(k < 3) {
                     document.getElementById("check_out").setAttribute("disabled", "");
+                    
                 } else {
                     document.getElementById("check_out").removeAttribute("disabled");
                 }
@@ -270,39 +271,54 @@
             document.getElementById("check_out").href = "/AgriLink/checkout.php?" + param;
         }
 
-        let items = document.getElementsByName('foo[]');
-        for(var i=0, n=items.length;i<n;i++) {
-            items[i].addEventListener("click", () => {
-                let k = 0;
-                for (let j = 0; j < items.length; j++) {
-                    if (items[j].checked) {
+        document.addEventListener("DOMContentLoaded", () => {
+            const items = document.getElementsByName('foo[]');
+            const totalProd = document.getElementsByClassName("total");
+            const checkOutButton = document.getElementById("check_out");
+            const priceElement = document.getElementById("price");
+            const itemsElement = document.getElementById("items");
+
+            // Event delegation for click events
+            document.addEventListener("click", (event) => {
+                if (event.target && event.target.name === 'foo[]') {
+                    let k = 0; // Count of checked items
+                    let overall = 0; // Total price
+                    let param = ""; // Query parameters for checkout
+                    let paramIndex = 0; // Index for query parameters
+
+                    for (let j = 0; j < items.length; j++) {
+                        if (items[j].checked) {
                             k++;
+                            // Extract the price and convert it to a number
+                            const priceText = totalProd[j].innerHTML.replace("₱", "").replace(/,/g, "");
+                            const price = parseInt(priceText, 10);
+                            overall += price;
+
+                            // Add item value and quantity to the query parameters
+                            const qty = document.getElementById("qty" + j).value;
+                            param += `${paramIndex > 0 ? "&" : ""}${paramIndex}=${items[j].value}&qty${paramIndex}=${qty}`;
+                            paramIndex++;
+                        }
                     }
-                } 
-                const totalProd = document.getElementsByClassName("total");
-                let overall = 0;
-                let param = "";
-                let paramIndex = 0;
-                for (let l=0; l<items.length; l++) {
-                    if (items[l].checked) {
-                        let total = totalProd[l].innerHTML.replace("₱", "");
-                            total = parseInt(total.replace(",", ""));
-                        overall += total;
-                        let qty = document.getElementById("qty"+l);
-                        param+= (paramIndex > 0 ? "&" : "") + paramIndex + "=" + items[l].value+"&qty"+ paramIndex + "=" + qty.value;
-                        paramIndex++;
+
+                    // Update the checkout button's href
+                    checkOutButton.href = `/AgriLink/checkout.php?${param}`;
+
+                    // Update the total price display
+                    priceElement.innerHTML = `₱${overall.toLocaleString()}.00`;
+
+                    // Update the total items count
+                    itemsElement.innerHTML = `Total item (${k}):`;
+
+                    // Enable or disable the checkout button based on the number of selected items
+                    if (k < 3) {
+                        checkOutButton.setAttribute("disabled", "");
+                    } else {
+                        checkOutButton.removeAttribute("disabled");
                     }
-                }
-                document.getElementById("check_out").href = "/AgriLink/checkout.php?" + param;
-                document.getElementById("price").innerHTML = "₱" + overall.toLocaleString() + ".00";
-                document.getElementById("items").innerHTML = "Total item ("+k+"):";
-                if(k < 1) {
-                    document.getElementById("check_out").setAttribute("disabled", "");
-                } else {
-                    document.getElementById("check_out").removeAttribute("disabled");
                 }
             });
-        }
+        });
 
         tailwind.config = {
             darkMode: 'class',
@@ -320,5 +336,6 @@
             }
         })
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
 </body>
 </html>

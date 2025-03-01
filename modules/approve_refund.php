@@ -5,7 +5,7 @@
     $checkout = $crud->read("checkout", $refund['order_id']);
     $product = $crud->read("product", $checkout['product_id']);
     $crud->update("refund", $_GET['id'], ["status" => "approved"]);
-    $crud->update("product", $checkout['product_id'], ["stock" => (int)$product['stock']+1]);
+    $crud->update("product", $checkout['product_id'], ["stock" => (int)$product['current_stock']+1]);
     $crud->create("audit_log",  [
         "product_name" => $product['name'],
         "seller_id" => $product['seller_id'],

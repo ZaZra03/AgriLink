@@ -70,7 +70,7 @@
                     $length = count($sale_prod);
                     for ($outer = 0; $outer < $length; $outer++) {
                         for ($inner = 0; $inner < $length; $inner++) {
-                            if (((int)$sale_prod[$outer]['stock'] - (int)$sale_prod[$outer]['available']) > ((int)$sale_prod[$inner]['stock'] - (int)$sale_prod[$inner]['available'])) {
+                            if (((int)$sale_prod[$outer]['current_stock'] - (int)$sale_prod[$outer]['available']) > ((int)$sale_prod[$inner]['current_stock'] - (int)$sale_prod[$inner]['available'])) {
                                 $tmp = $sale_prod[$outer];
                                 $sale_prod[$outer] = $sale_prod[$inner] ;
                                 $sale_prod[$inner]  = $tmp;

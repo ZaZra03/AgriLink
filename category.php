@@ -1,10 +1,9 @@
 <?php
+    require_once("./helpers/crud.php");
     $productCount = 0;
     if(!isset($_GET['q']) || $_GET['q'] == null) {
         header("Location: /AgriLink/index.php");
     }
-    include "./components/navbar.php";
-    include "./components/sidebar.php";
     $records = $crud->search("product", $_GET['q'], ["type"]);
     $productCount = $records ? count($records) : 0;
     echo $productCount;
@@ -33,6 +32,12 @@
 </head>
 <body class="relative">
 
+    <?php 
+    
+        include "./components/navbar.php";
+        include "./components/sidebar.php";
+    
+    ?>
 
     <div class="relative max-w-[1080px] mx-auto pt-10 pb-96 px-5">
         <div class="sm:ml-64">
@@ -73,7 +78,7 @@
                                                 <h1 class="text-sm font-bold text-neutral-content break-words text-center">'.(strlen($records[$i]['name']) <= 17 ? $records[$i]['name'] : substr($records[$i]['name'], 0, 17)."...").'</h1>
                                                 <div class="w-full flex justify-between font-semibold items-center px-2">
                                                     <p class="text-primary">₱'.number_format(round((int)$records[$i]['price'] - ((int)$records[$i]['price'] * ((int)$records[$i]['discount']/100)))).'.00</p>
-                                                    <span class="text-neutral-content opacity-70 text-xs">'.((int)$records[$i]['stock'] - (int)$records[$i]['available']).' sold</span>
+                                                    <span class="text-neutral-content opacity-70 text-xs">'.((int)$records[$i]['current_stock'] - (int)$records[$i]['available']).' sold</span>
                                                 </div>
                                                 <a href="/AgriLink/product.php?id='.$records[$i]['id'].'" class="rounded-t-none btn btn-primary btn-sm col-span-2 w-full">Buy</a>
                                             </div>

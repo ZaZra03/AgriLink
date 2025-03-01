@@ -52,22 +52,34 @@
                     <input type="number" id="discount" name="discount" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                 </div>',
                 '<div>
-                    <label for="stock" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Current Stock</label>
-                    <input type="number" id="stock" name="stock" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                    <label for="current_stock" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Current Stock</label>
+                    <input type="number" id="current_stock" name="current_stock" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                </div>',
+                '<div>
+                    <label for="next_month_stock" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Next Month Stock</label>
+                    <input type="number" id="next_month_stock" name="next_month_stock" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                </div>',
+                '<div>
+                    <label for="available" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Available</label>
+                    <select id="available" name="available" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                        <option value="1">Available</option>
+                        <option value="0">Unavailable</option>
+                    </select>
                 </div>',
                 '<div>
                     <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image</label>
-                    <input name="image" id="image" required class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
+                    <input name="image" id="image" required class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" type="file">
                 </div>',
                 '<div>
                     <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
                     <textarea name="description" id="description" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
                 </div>',
+
                 '
                 <input type="hidden" name="table" value="product">
                 <input type="hidden" name="location" value="'.http_build_query($_GET).'">
                 ',
-            ], "add/add_product.php");
+            ], "/add/add_product.php");
 
             include("./components/modal/import_modal.php");
             import_modal();
@@ -82,8 +94,14 @@
                     <th scope="col" class="px-6 py-3">
                         Product
                     </th>
-                    <th scope="col" class="px-6 py-3">
-                        Stock
+                    <th scope="col" class="px-4 py-3">
+                        Stock (This month)
+                    </th>
+                    <th scope="col" class="px-4 py-3">
+                        Stock (Next month)
+                    </th>
+                    <th scope="col" class="px-4 py-3">
+                        Available
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Price
@@ -120,8 +138,14 @@
                                     <td class="pr-6 py-4 font-semibold text-gray-900 :text-white">
                                         '.$record['name'].'
                                     </td>
-                                    <td class="px-6 py-4 font-semibold text-gray-900 :text-white">
-                                        '.$record['stock'].'
+                                    <td class="px-4 py-4 font-semibold text-gray-900 :text-white">
+                                        '.$record['current_stock'].'
+                                    </td>
+                                    <td class="px-4 py-4 font-semibold text-gray-900 :text-white">
+                                        '.$record['next_month_stock'].'
+                                    </td>
+                                    <td class="px-4 py-4 font-semibold text-gray-900 :text-white">
+                                        ' . (($record['available'] == 1) ? 'Available' : 'Unavailable') . '
                                     </td>
                                     <td class="px-6 py-4 font-semibold text-gray-900 :text-white">
                                         ₱'.$record['price'].'
@@ -158,8 +182,16 @@
                                         <input type="text" value="'.$record['discount'].'" id="discount" name="discount" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                                     </div>',
                                     '<div>
-                                        <label for="stock" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Current Stock</label>
-                                        <input type="text" value="'.$record['stock'].'" id="stock" name="stock" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                                        <label for="stock" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">This Month Stock</label>
+                                        <input type="text" value="'.$record['current_stock'].'" id="stock" name="stock" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                                    </div>',
+                                    '<div>
+                                        <label for="stock" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Next Month Stock</label>
+                                        <input type="text" value="'.$record['next_month_stock'].'" id="stock" name="stock" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                                    </div>',
+                                    '<div>
+                                        <label for="stock" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Available</label>
+                                        <input type="text" value="' . (($record['available'] == 1) ? 'Available' : 'Unavailable') . '" id="stock" name="stock" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                                     </div>',
                                     '<div>
                                         <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image</label>
@@ -187,9 +219,15 @@
                                         '.$record['name'].'
                                     </td>
                                     <td class="px-6 py-4 font-semibold text-gray-900 :text-white">
-                                        '.$record['stock'].'
+                                        '.$record['current_stock'].'
                                     </td>
-                                    <td class="px-6 py-4 font-semibold text-gray-900 :text-white">
+                                    <td class="px-4 py-4 font-semibold text-gray-900 :text-white">
+                                        '.$record['next_month_stock'].'
+                                    </td>
+                                    <td class="px-4 py-4 font-semibold text-gray-900 :text-white">
+                                        ' . (($record['available'] == 1) ? 'Available' : 'Unavailable') . '
+                                    </td>
+                                    <td class="px-4 py-4 font-semibold text-gray-900 :text-white">
                                         ₱'.$record['price'].'
                                     </td>
                                     <td class="px-6 py-4">
@@ -224,8 +262,16 @@
                                         <input type="text" value="'.$record['discount'].'" id="discount" name="discount" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                                     </div>',
                                     '<div>
-                                        <label for="stock" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Current Stock</label>
-                                        <input type="text" value="'.$record['stock'].'" id="stock" name="stock" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                                        <label for="stock" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">This Month Stock</label>
+                                        <input type="text" value="'.$record['current_stock'].'" id="stock" name="stock" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                                    </div>',
+                                    '<div>
+                                        <label for="stock" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Next Month Stock</label>
+                                        <input type="text" value="'.$record['next_month_stock'].'" id="stock" name="stock" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                                    </div>',
+                                    '<div>
+                                        <label for="stock" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Available</label>
+                                        <input type="text" value="' . (($record['available'] == 1) ? 'Available' : 'Unavailable') . '" id="stock" name="stock" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                                     </div>',
                                     '<div>
                                         <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image</label>
@@ -273,3 +319,20 @@
     <!-- END OF TABLE -->
 
 </div>
+<script>
+    let originalValue = null; // Store the original value
+
+    document.getElementById('price').addEventListener('focus', function() {
+        if (originalValue !== null) {
+            this.value = originalValue; // Restore the original value when focused
+        }
+    });
+
+    document.getElementById('price').addEventListener('blur', function() {
+        let value = parseFloat(this.value) || 0;
+        if (originalValue === null) {
+            originalValue = value; // Store the original value only once
+        }
+        this.value = value + 50; // Show modified value on blur
+    });
+</script>

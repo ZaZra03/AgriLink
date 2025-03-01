@@ -1,16 +1,16 @@
 <div class="p-4 pt-20 sm:ml-64">
-    <div class="mb-5 grid grid-cols-3 gap-5">
-        <div class="rounded-lg bg-neutral w-full h-full p-10 flex justify-between gap-2 items-center border border-gray-200">
+    <div class="mb-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div class="rounded-lg bg-neutral w-full h-full p-6 flex justify-between gap-2 items-center border border-gray-200">
             <div>
                 <h1 class="text-gray-400 font-semibold text-lg mb-2">Products</h1>
-                <div class="text-gray-600 font-semibold text-6xl"><?php echo count($crud->search("product", $user['id'], ['seller_id']) ? $crud->search("product", $user['id'], ['seller_id']) : []) ?></div>
+                <div class="text-gray-600 font-semibold text-5xl sm:text-6xl"><?php echo count($crud->search("product", $user['id'], ['seller_id']) ? $crud->search("product", $user['id'], ['seller_id']) : []) ?></div>
             </div>
             <svg class="w-20 h-20 text-orange-400" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title></title> <g fill="none" fill-rule="evenodd" id="页面-1" stroke="none" stroke-width="1"> <g id="导航图标" transform="translate(-325.000000, -80.000000)"> <g id="编组" transform="translate(325.000000, 80.000000)"> <polygon fill="#FFFFFF" fill-opacity="0.01" fill-rule="nonzero" id="路径" points="24 0 0 0 0 24 24 24"></polygon> <polygon id="路径" points="22 7 12 2 2 7 2 17 12 22 22 17" stroke="currentColor" stroke-linejoin="round" stroke-width="1.5"></polygon> <line id="路径" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" x1="2" x2="12" y1="7" y2="12"></line> <line id="路径" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" x1="12" x2="12" y1="22" y2="12"></line> <line id="路径" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" x1="22" x2="12" y1="7" y2="12"></line> <line id="路径" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" x1="17" x2="7" y1="4.5" y2="9.5"></line> </g> </g> </g> </g></svg>
         </div>
-        <div class="rounded-lg bg-neutral w-full h-full p-10 flex justify-between gap-2 items-center border border-gray-200">
+        <div class="rounded-lg bg-neutral w-full h-full p-6 flex justify-between gap-2 items-center border border-gray-200">
             <div>
                 <h1 class="text-gray-400 font-semibold text-lg mb-2">Checkouts</h1>
-                <div class="text-gray-600 font-semibold text-6xl"><?php 
+                <div class="text-gray-600 font-semibold text-5xl sm:text-6xl"><?php 
                     echo count(array_filter($crud->read_all("checkout") ? $crud->read_all("checkout") : [], function($var) use($crud){
                         $product = $crud->read("product", $var['product_id']);
                         return $product['seller_id'] == $_SESSION['user_id'];
@@ -19,10 +19,10 @@
             </div>
             <svg class="w-20 h-20 text-blue-400" viewBox="0 0 1024 1024" fill="currentColor" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="24.576"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M300 462.4h424.8v48H300v-48zM300 673.6H560v48H300v-48z" fill=""></path><path d="M818.4 981.6H205.6c-12.8 0-24.8-2.4-36.8-7.2-11.2-4.8-21.6-11.2-29.6-20-8.8-8.8-15.2-18.4-20-29.6-4.8-12-7.2-24-7.2-36.8V250.4c0-12.8 2.4-24.8 7.2-36.8 4.8-11.2 11.2-21.6 20-29.6 8.8-8.8 18.4-15.2 29.6-20 12-4.8 24-7.2 36.8-7.2h92.8v47.2H205.6c-25.6 0-47.2 20.8-47.2 47.2v637.6c0 25.6 20.8 47.2 47.2 47.2h612c25.6 0 47.2-20.8 47.2-47.2V250.4c0-25.6-20.8-47.2-47.2-47.2H725.6v-47.2h92.8c12.8 0 24.8 2.4 36.8 7.2 11.2 4.8 21.6 11.2 29.6 20 8.8 8.8 15.2 18.4 20 29.6 4.8 12 7.2 24 7.2 36.8v637.6c0 12.8-2.4 24.8-7.2 36.8-4.8 11.2-11.2 21.6-20 29.6-8.8 8.8-18.4 15.2-29.6 20-12 5.6-24 8-36.8 8z" fill=""></path><path d="M747.2 297.6H276.8V144c0-32.8 26.4-59.2 59.2-59.2h60.8c21.6-43.2 66.4-71.2 116-71.2 49.6 0 94.4 28 116 71.2h60.8c32.8 0 59.2 26.4 59.2 59.2l-1.6 153.6z m-423.2-47.2h376.8V144c0-6.4-5.6-12-12-12H595.2l-5.6-16c-11.2-32.8-42.4-55.2-77.6-55.2-35.2 0-66.4 22.4-77.6 55.2l-5.6 16H335.2c-6.4 0-12 5.6-12 12v106.4z" fill=""></path></g></svg>
         </div>
-        <div class="rounded-lg bg-neutral w-full h-full p-10 flex justify-between gap-2 items-center border border-gray-200">
+        <div class="rounded-lg bg-neutral w-full h-full p-6 flex justify-between gap-2 items-center border border-gray-200">
             <div>
                 <h1 class="text-gray-400 font-semibold text-lg mb-2">Completed Orders</h1>
-                <div class="text-gray-600 font-semibold text-6xl"><?php 
+                <div class="text-gray-600 font-semibold text-5xl sm:text-6xl"><?php 
                     echo count(array_filter($crud->search("checkout", "complete", ["status"]) ? $crud->search("checkout", "complete", ["status"]) : [], function($var) use($crud){
                         $product = $crud->read("product", $var['product_id']);
                         return $product['seller_id'] == $_SESSION['user_id'];

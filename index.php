@@ -20,6 +20,7 @@
     <script src="./javascript/tailwind.js"></script>
     <link rel="stylesheet" href="./assets/css/daisyui.css">
     <link rel="stylesheet" href="./assets/css/config.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body class="relative">
 
@@ -156,7 +157,7 @@
                         <?php
                             for ($outer = 0; $outer < $length; $outer++) {
                                 for ($inner = 0; $inner < $length; $inner++) {
-                                    if (((int)$sale_prod[$outer]['stock'] - (int)$sale_prod[$outer]['available']) > ((int)$sale_prod[$inner]['stock'] - (int)$sale_prod[$inner]['available'])) {
+                                    if (((int)$sale_prod[$outer]['current_stock'] - (int)$sale_prod[$outer]['available']) > ((int)$sale_prod[$inner]['current_stock'] - (int)$sale_prod[$inner]['available'])) {
                                         $tmp = $sale_prod[$outer];
                                         $sale_prod[$outer] = $sale_prod[$inner] ;
                                         $sale_prod[$inner]  = $tmp;
@@ -170,13 +171,13 @@
                                             <a href="./product.php?id='.$sale_prod[$i]['id'].'" class="flex flex-col justify-center items-center w-40 gap-1">
                                                 <div class="w-40 h-40 bg-gray-300 rounded-lg relative overflow-hidden">
                                                     <img src="/AgriLink/assets/products/'.$sale_prod[$i]['image'].'" class="w-full h-full object-cover rounded-t-lg z-0 hover:scale-125 transition" />
-                                                    <h1 class="absolute bottom-3 z-30 font-bold text-primary-content text-sm text-center w-full">Monthly Sales '.((int)$sale_prod[$i]['stock'] - (int)$sale_prod[$i]['available']).'</h1>
+                                                    <h1 class="absolute bottom-3 z-30 font-bold text-primary-content text-sm text-center w-full">Monthly Sales '.((int)$sale_prod[$i]['current_stock'] - (int)$sale_prod[$i]['available']).'</h1>
                                                     <div class="absolute bottom-0 w-full h-12 bg-primary rounded-b-lg opacity-80"></div>
                                                 </div>
                                                 <h1 class="text-sm font-bold text-neutral-content break-words text-center">'.(strlen($sale_prod[$i]['name']) <= 17 ? $sale_prod[$i]['name'] : substr($sale_prod[$i]['name'], 0, 17)."...").'</h1>
                                                 <div class="w-full flex justify-between font-semibold items-center">
                                                     <p class="text-primary">₱'.number_format(round((int)$sale_prod[$i]['price'])).'.00</p>
-                                                    <span class="text-neutral-content opacity-70 text-xs">'.((int)$sale_prod[$i]['stock'] - (int)$sale_prod[$i]['available']).' sold</span>
+                                                    <span class="text-neutral-content opacity-70 text-xs">'.((int)$sale_prod[$i]['current_stock'] - (int)$sale_prod[$i]['available']).' sold</span>
                                                 </div>
                                             </a>
                                         ';
@@ -212,7 +213,7 @@
                                                 <h1 class="text-sm font-bold text-neutral-content break-words text-center">'.(strlen($product['name']) <= 17 ? $product['name'] : substr($product['name'], 0, 17)."...").'</h1>
                                                 <div class="w-full flex justify-between font-semibold items-center">
                                                     <p class="text-primary">₱'.number_format(round((int)$product['price'] - ((int)$product['price'] * ((int)$product['discount']/100)))).'.00</p>
-                                                    <span class="text-neutral-content opacity-70 text-xs">'.((int)$product['stock'] - (int)$product['available']).' sold</span>
+                                                    <span class="text-neutral-content opacity-70 text-xs">'.((int)$product['current_stock'] - (int)$product['available']).' sold</span>
                                                 </div>
                                                 <a href="./product.php?id='.$product['id'].'" class="rounded-t-none btn btn-primary btn-sm col-span-2 w-full">View Product</a>
                                             </div>

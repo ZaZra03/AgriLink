@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | AgriLink</title>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
     <script src="../javascript/tailwind.js"></script>
     <link rel="stylesheet" href="../assets/css/daisyui.css">
     <link rel="stylesheet" href="../assets/css/config.css">
@@ -58,7 +59,7 @@
             include "./components/admin/dashboard.php";
         }
     ?>
-
+    
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <!-- <script src="../javascript/charts.js" type="module"></script> -->
     <script src="../javascript/flowbite.js"></script>

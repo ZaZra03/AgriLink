@@ -22,11 +22,14 @@
     
     $data = [
         "name" => $_POST['name'],
-        "type" => $_POST['type'],
-        "price" => $_POST['price'],
-        "discount" => $_POST['discount'],
-        "stock" => $_POST['stock'],
-        "available" => $_POST['stock'],
+        "type" => $_POST['type'], 
+        "location" => $_POST['location'],
+        "price" => strval($_POST['price']),
+        "discount" => strval($_POST['discount']),
+        "current_stock" => strval($_POST['current_stock']),
+        "next_month_stock" => strval($_POST['next_month_stock']),
+        "available" => 1,
+        "sold" => 0,
         "description" => nl2br($_POST['description']),
         "image" => ($_FILES['image']['name']!="") ? $filename.".".$ext : $crud->read($_POST['table'], $_POST['id'])['image'],
     ];

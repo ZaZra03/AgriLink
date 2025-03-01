@@ -12,7 +12,6 @@
     } else {
         header("Location: /AgriLink/404.php");
     }
-    include "./components/navbar.php";
 ?>
 
 <!DOCTYPE html>
@@ -42,6 +41,7 @@
 </head>
 <body class="relative">
     <?php
+        include "./components/navbar.php";
         if(isset($_GET['status']) && $_GET['status'] == "error") {
             echo '
             <div id="error" class="alert alert-error flex fixed mt-20 top-5 left-[50%] w-auto max-w-[400px] translate-x-[-50%] px-4 py-2">
@@ -123,7 +123,7 @@
                                 |
                             </div> -->
                             <div class="ml-2 flex gap-1 text-gray-400">
-                                <h1 class="link link-primary mr-1"><?php echo (int)$product_view['stock'] - (int)$product_view['available'] ?></h1>
+                                <h1 class="link link-primary mr-1"><?php echo (int)$product_view['sold'] ?></h1>
                                 <h2 class="text-gray-500 mr-2">Sold</h2>
                             </div>
                         </div>
@@ -299,7 +299,7 @@
                                         <h1 class="text-sm font-bold text-neutral-content break-words text-center">'.(strlen($records[$i]['name']) <= 17 ? $records[$i]['name'] : substr($records[$i]['name'], 0, 17)."...").'</h1>
                                         <div class="w-full flex justify-between font-semibold items-center px-2">
                                             <p class="text-primary">₱'.number_format(round((int)$records[$i]['price'] - ((int)$records[$i]['price']*((int)$records[$i]['discount'])/100))).'.00</p>
-                                            <span class="text-neutral-content opacity-70 text-xs">'.((int)$records[$i]['stock'] - (int)$records[$i]['available']).' sold</span>
+                                            <span class="text-neutral-content opacity-70 text-xs">'.((int)$records[$i]['sold']).' sold</span>
                                         </div>
                                         <a href="/AgriLink/product.php?id='.$records[$i]['id'].'" class="rounded-t-none btn btn-primary btn-sm col-span-2 w-full">View Product</a>
                                     </div>

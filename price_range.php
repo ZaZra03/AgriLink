@@ -1,10 +1,9 @@
 <?php
+    require_once("./helpers/crud.php");
     $productCount = 0;
     if((!isset($_GET['min']) || $_GET['min'] == null) || (!isset($_GET['max']) || $_GET['max'] == null)) {
         header("Location: /AgriLink/index.php");
     }
-    include "./components/navbar.php";
-    include "./components/sidebar.php";
     $records = $crud->read_all("product");
     $records = array_filter($records, function($r) {
         return (int)$r['price'] >= (int)$_GET['min'] && (int)$r['price'] <= (int)$_GET['max'];
@@ -35,13 +34,19 @@
     </style>
 </head>
 <body class="relative">
+    <?php 
+    
+    include "./components/navbar.php";
+    include "./components/sidebar.php";
+    
+    ?>
     <div class="relative max-w-[1080px] mx-auto pt-10 pb-96 px-5">
         <div class="sm:ml-64">
             <div class="rounded-lg dark:border-gray-700">
                 <div class="w-full gap-4 <?php echo $records && count($records) <= 5 ? "min-h-[50vh]" : "" ?>">            
                     <div class="w-full flex flex-col gap-3 py-4 rounded">
                         <div class="flex items-center gap-2 mt-5">
-                            <h1 class="font-semibold text-2xl"><?php echo ucwords($_GET['q']) ?></h1>
+                        <h1 class="font-semibold text-2xl"><?php echo 'Price Range: ₱'.number_format($_GET['min']).'.00 – '.'₱'.number_format($_GET['max']).'.00' ?></h1>
                         </div>
                         <!-- <div class="bg-base-200 flex justify-between items-center p-4 py-3">
                             <div class="flex items-center gap-2">
@@ -74,7 +79,7 @@
                                             <h1 class="text-sm font-bold text-neutral-content break-words text-center">'.(strlen($record['name']) <= 17 ? $record['name'] : substr($record['name'], 0, 17)."...").'</h1>
                                             <div class="w-full flex justify-between font-semibold items-center px-2">
                                                 <p class="text-primary">₱'.number_format(round((int)$record['price'] - ((int)$record['price'] * ((int)$record['discount']/100)))).'.00</p>
-                                                <span class="text-neutral-content opacity-70 text-xs">'.((int)$record['stock'] - (int)$record['available']).' sold</span>
+                                                <span class="text-neutral-content opacity-70 text-xs">'.((int)$record['current_stock'] - (int)$record['available']).' sold</span>
                                             </div>
                                             <a href="/AgriLink/product.php?id='.$record['id'].'" class="rounded-t-none btn btn-primary btn-sm col-span-2 w-full">Buy</a>
                                         </div>

@@ -27,15 +27,30 @@
                 <!-- <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">AgriLink</span> -->
             </a>
         </div>
-        <div class="relative hidden w-[50%] md:block">
-            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                </svg>
-                <span class="sr-only">Search icon</span>
+        <form action="/AgriLink/search.php" class="relative hidden w-[50%] md:block">
+            <div>
+                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                    </svg>
+                    <button>
+                        
+                    </button>
+                    <span class="sr-only">Search icon</span>
+                </div>
+                <input type="text" id="search-navbar" class="block w-full p-2 ps-10 text-sm text-black border border-gray-300 rounded-lg bg-white focus:ring-blue-500 focus:border-blue-500" placeholder="Search..." onkeyup="showHint(this.value)" value="<?php echo isset($_GET['search']) ? $_GET['search'] : "" ?>" name="search">
+                <div id="search-results" class="absolute w-full bg-white border border-gray-300 rounded-lg mt-1 hidden"></div>
             </div>
-            <input type="text" id="search-navbar" class="block w-full p-2 ps-10 text-sm text-black border border-gray-300 rounded-lg bg-white focus:ring-blue-500 focus:border-blue-500" placeholder="Search...">
-        </div>
+        </form>
+
+        <!-- <form action="/Agrilink-Org/search.php"
+            class="h-10 bg-neutral w-full max-w-[40em] flex justify-between items-center px-3 gap-2 rounded-md">
+            <input type="text" name="search" style="border: none; outline: none;" class="bg-neutral w-full"
+                value="<?php echo isset($_GET['search']) ? $_GET['search'] : "" ?>">
+            <button class="w-5 h-5">
+                <img src="/Agrilink-Org/assets/icons/searchicon.png" alt="">
+            </button>
+        </form> -->
 
         <div class="flex items-center">
             <div class="flex items-center ms-3">
@@ -210,6 +225,32 @@
     </div>
   </div>
 </nav>
+<script>
+    function showHint(str) {
+    if (str.length == 0) {
+        document.getElementById("search-results").innerHTML = "";
+        document.getElementById("search-results").style.display = "none";
+        return;
+    } else {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("search-results").innerHTML = this.responseText;
+            document.getElementById("search-results").style.display = "block";
+        }
+        };
+        xmlhttp.open("GET", "search_type.php?q=" + encodeURIComponent(str), true);
+        xmlhttp.send();
+    }
+    }
+
+    // Hide results when clicking outside
+    document.addEventListener("click", function(event) {
+        if (!event.target.closest("#search-results") && event.target.id !== "search-navbar") {
+        document.getElementById("search-results").style.display = "none";
+    }
+    });
+</script>
 
 
 

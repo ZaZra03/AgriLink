@@ -96,24 +96,24 @@ class Crud {
     public function search($table, $search_term, $select) {
         $selected_term = "";
         $index = 1;
-
+    
+        // Build the search query dynamically
         foreach($select as $selected) {
-            $selected_term .= $selected . " LIKE :search_term ";
+            $selected_term .= "LOWER($selected) LIKE LOWER(:search_term) ";
             if(++$index <= count($select)) {
                 $selected_term .= "OR ";
             }
         }
-        
+    
+        // Prepare the SQL statement
         $stmt = $this->pdo->prepare("SELECT * FROM $table WHERE $selected_term ORDER BY id DESC");
-        $stmt->bindValue(':search_term', "$search_term", PDO::PARAM_STR);
+        $stmt->bindValue(':search_term', "%$search_term%", PDO::PARAM_STR); // Use wildcards for partial matching
         $stmt->execute();
     
+        // Fetch all matching records
         $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
-        $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM $table WHERE $selected_term");
-        $stmt->bindValue(':search_term', "%$search_term%", PDO::PARAM_STR);
-        $stmt->execute();
-    
+        // If records are found, return them
         if ($records) {
             return $records;
         } else {
