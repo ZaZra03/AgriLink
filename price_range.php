@@ -40,7 +40,7 @@
     include "./components/sidebar.php";
     
     ?>
-    <div class="relative max-w-[1080px] mx-auto pt-10 pb-96 px-5">
+    <div class="relative max-w-[1080px] mx-auto pt-10 pb-10 px-5">
         <div class="sm:ml-64">
             <div class="rounded-lg dark:border-gray-700">
                 <div class="w-full gap-4 <?php echo $records && count($records) <= 5 ? "min-h-[50vh]" : "" ?>">            
