@@ -95,7 +95,7 @@
         }
     ?>
 
-    <div class="max-w-[965px] mx-auto pb-96 pt-[3em]">
+    <div class="max-w-[965px] mx-auto pb-10 pt-[3em]">
         <!-- PRODUCT DESCRIPTION -->
         <div class="grid grid-cols-3 w-full mt-10 bg-neutral p-5 rounded gap-4">
             <div class="">
@@ -148,8 +148,11 @@
                                     <h1 class="text-gray-500 text-sm">Seller</h1>
                                 </div>
                                 <div class="col-span-3 w-full">
-                                    <h1 class="text-sm p-1"><?php echo $seller['name'] ?></h1>
+                                    <a href="/AgriLink/seller.php?id=<?php echo $seller['id']; ?>" class="text-blue-500 hover:text-blue-700 underline">
+                                        <h1 class="text-sm p-1"><?php echo $seller['name']; ?></h1>
+                                    </a>
                                 </div>
+
                                 <div>
                                     <h1 class="text-gray-500 text-sm">Quantity</h1>
                                 </div>
