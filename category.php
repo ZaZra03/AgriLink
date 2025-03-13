@@ -30,7 +30,7 @@
 
     </style>
 </head>
-<body class="relative">
+<body class="flex flex-col min-h-screen">
 
     <?php 
     

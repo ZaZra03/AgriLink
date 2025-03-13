@@ -9,7 +9,6 @@
         return (int)$r['price'] >= (int)$_GET['min'] && (int)$r['price'] <= (int)$_GET['max'];
     });
     $productCount = $records ? count($records) : 0;
-    echo $productCount;
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +32,7 @@
 
     </style>
 </head>
-<body class="relative">
+<body class="flex flex-col min-h-screen">
     <?php 
     
     include "./components/navbar.php";

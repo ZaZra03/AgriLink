@@ -17,12 +17,12 @@
         include "./components/navbar.php";
     ?>
 
-    <div class="max-w-[965px] mx-auto pb-96 pt-[6em]">
+    <div class="max-w-[965px] mx-auto mb-20 pt-[6em]">
 
 
         <h1 class="font-bold text-3xl text-center text-neutral-content">SALE</h1>
 
-        <div class="flex justify-center items-center mt-10">
+        <div class="flex justify-center items-center">
             
             <!-- <div class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 ">
                 <ul class="flex flex-wrap -mb-px">

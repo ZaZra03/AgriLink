@@ -6,7 +6,6 @@
     }
     $records = $crud->search("product", $_GET['q'], ["location"]);
     $productCount = $records ? count($records) : 0;
-    echo $productCount;
 ?>
 
 <!DOCTYPE html>
@@ -30,7 +29,7 @@
 
     </style>
 </head>
-<body class="relative">
+<body class="flex flex-col min-h-screen">
     <?php 
     
     include "./components/navbar.php";

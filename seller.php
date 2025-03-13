@@ -29,12 +29,13 @@
     <link rel="stylesheet" href="./assets/css/daisyui.css">
     <link rel="stylesheet" href="./assets/css/config.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3"></script>
 </head>
 <body class="relative min-h-screen flex flex-col">
     <?php include "./components/navbar.php"; ?>
 
-    <div class="relative max-w-5xl mx-auto my-20 px-5">
-
+    <div class="relative my-20 px-5">
         <div class="rounded-lg shadow-lg p-6 bg-white">
             <div class="bg-gray-200 w-full h-52 rounded-lg overflow-hidden">
                 <img src="./assets/images/cover_default.jpg" class="w-full h-full object-cover" alt="Cover Photo">
@@ -49,40 +50,135 @@
                 </div>
             </div>
 
-            <!-- Flowbite Button Group -->
+            <!-- Button Group -->
             <div class="flex justify-center mt-6">
                 <div class="inline-flex rounded-md shadow-sm" role="group">
-                    <button type="button" class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-l-lg hover:bg-gray-100 focus:z-10">Products</button>
-                    <button type="button" class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-r-lg hover:bg-gray-100 focus:z-10">Graph</button>
+                    <button id="productsBtn" type="button" class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-l-lg hover:bg-gray-100 focus:z-10">
+                        Products
+                    </button>
+                    <button id="graphBtn" type="button" class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-r-lg hover:bg-gray-100 focus:z-10">
+                        Graph
+                    </button>
                 </div>
             </div>
 
-            <h2 class="mt-10 text-xl font-semibold text-center">Products by Seller</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-5 mt-5">
-                <?php if ($products) { 
-                    foreach ($products as $product) { ?>
-                        <div class="bg-white shadow-md rounded-lg overflow-hidden">
-                            <div class="w-full h-48 bg-gray-300">
-                                <img src="/AgriLink/assets/products/<?php echo htmlspecialchars($product['image']); ?>" 
-                                    class="w-full h-full object-cover" alt="Product Image">
+            <!-- Products Section -->
+            <div id="productsSection" class="mt-10">
+                <h2 class="text-xl font-semibold text-center">Products by Seller</h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
+                    <?php if ($products) { 
+                        foreach ($products as $product) { ?>
+                            <div class="bg-white border border-gray-200 shadow-sm rounded-lg overflow-hidden">
+                                <div class="w-full h-36 bg-gray-100">
+                                    <img src="/AgriLink/assets/products/<?php echo htmlspecialchars($product['image']); ?>" 
+                                        class="w-full h-full object-cover" alt="Product Image">
+                                </div>
+                                <div class="p-3">
+                                    <h3 class="text-sm font-semibold text-gray-800"><?php echo htmlspecialchars($product['name']); ?></h3>
+                                    <p class="text-primary text-base font-bold">₱<?php echo number_format((int)$product['price'] - ((int)$product['price'] * ((int)$product['discount'] / 100))); ?>.00</p>
+                                    <p class="text-xs text-gray-600">Current Stock: <?php echo htmlspecialchars($product['current_stock']); ?></p>
+                                    <p class="text-xs text-green-600 font-medium">Next Month Stock: <?php echo htmlspecialchars($product['next_month_stock']); ?></p>
+                                    <a href="/AgriLink/product.php?id=<?php echo htmlspecialchars($product['id']); ?>" 
+                                    class="block text-center mt-2 bg-primary text-white py-1.5 rounded text-sm font-medium">
+                                        Buy Now
+                                    </a>
+                                </div>
                             </div>
-                            <div class="p-3">
-                                <h3 class="text-sm font-bold"><?php echo htmlspecialchars($product['name']); ?></h3>
-                                <p class="text-primary">₱<?php echo number_format((int)$product['price'] - ((int)$product['price'] * ((int)$product['discount'] / 100))); ?>.00</p>
-                                <p class="text-xs text-gray-500"><?php echo ((int)$product['current_stock'] - (int)$product['available']); ?> sold</p>
-                                <a href="/AgriLink/product.php?id=<?php echo htmlspecialchars($product['id']); ?>" 
-                                class="block text-center mt-2 bg-primary text-white py-1 rounded">Buy</a>
-                            </div>
-                        </div>
-                <?php } 
-                } else { ?>
-                    <p class="text-gray-500 col-span-full text-center py-10">No products found.</p>
-                <?php } ?>
+                    <?php } 
+                    } else { ?>
+                        <p class="text-gray-500 col-span-full text-center py-10">No products found.</p>
+                    <?php } ?>
+                </div>
             </div>
+
+
+            <!-- Chart Section (Hidden by Default) -->
+            <div id="chartSection" class="mt-10 hidden w-full">
+    <h2 class="text-xl font-semibold text-center mb-4">Stock Overview</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="w-full h-[400px]"><canvas id="porkChart"></canvas></div>
+        <div class="w-full h-[400px]"><canvas id="tilapiaChart"></canvas></div>
+        <div class="w-full h-[400px]"><canvas id="beefChart"></canvas></div>
+        <div class="w-full h-[400px]"><canvas id="sayoteChart"></canvas></div>
+        <div class="w-full h-[400px]"><canvas id="gabiChart"></canvas></div>
+    </div>
+</div>
+
         </div>
-    </div> 
+    </div>
+
+
 
     <?php include "./components/footer.php"; ?>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+    let porkChart, tilapiaChart, beefChart, sayoteChart, gabiChart; // Store chart instances
+
+    const productsBtn = document.getElementById("productsBtn");
+    const graphBtn = document.getElementById("graphBtn");
+    const productsSection = document.getElementById("productsSection");
+    const chartSection = document.getElementById("chartSection");
+
+    const datasets = {
+        pork: [120, 95, 140, 110, 130, 150],
+        tilapia: [80, 100, 90, 85, 95, 105],
+        beef: [60, 75, 70, 65, 80, 85],
+        sayote: [200, 180, 190, 210, 220, 230],
+        gabi: [50, 55, 60, 45, 50, 65]
+    };
+
+    const months = ["January", "February", "March", "April", "May", "June"];
+
+    function createChart(canvasId, label, data, color) {
+        const ctx = document.getElementById(canvasId).getContext("2d");
+        return new Chart(ctx, {
+            type: "bar",
+            data: {
+                labels: months,
+                datasets: [{
+                    label: label,
+                    data: data,
+                    backgroundColor: color,
+                    borderColor: color.replace("0.6", "1"),
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    }
+
+    function renderCharts() {
+        if (!porkChart) porkChart = createChart("porkChart", "Pork", datasets.pork, "rgba(255, 99, 132, 0.6)");
+        if (!tilapiaChart) tilapiaChart = createChart("tilapiaChart", "Tilapia", datasets.tilapia, "rgba(54, 162, 235, 0.6)");
+        if (!beefChart) beefChart = createChart("beefChart", "Beef", datasets.beef, "rgba(255, 206, 86, 0.6)");
+        if (!sayoteChart) sayoteChart = createChart("sayoteChart", "Sayote", datasets.sayote, "rgba(75, 192, 192, 0.6)");
+        if (!gabiChart) gabiChart = createChart("gabiChart", "Gabi", datasets.gabi, "rgba(153, 102, 255, 0.6)");
+    }
+
+    productsBtn.addEventListener("click", function () {
+        productsSection.classList.remove("hidden");
+        chartSection.classList.add("hidden");
+    });
+
+    graphBtn.addEventListener("click", function () {
+        productsSection.classList.add("hidden");
+        chartSection.classList.remove("hidden");
+        renderCharts();
+    });
+});
+
+
+
+    </script>
 </body>
 </html>

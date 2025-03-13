@@ -97,7 +97,7 @@
 
     <div class="max-w-[965px] mx-auto pb-10 pt-[3em]">
         <!-- PRODUCT DESCRIPTION -->
-        <div class="grid grid-cols-3 w-full mt-10 bg-neutral p-5 rounded gap-4">
+        <div class="mx-5 grid grid-cols-3 w-full mt-10 bg-neutral p-5 rounded gap-4">
             <div class="">
                 <div class="bg-gray-300 w-full aspect-square overflow-hidden">
                     <img src="/AgriLink/assets/products/<?php echo $product_view['image'] ?>" alt="" class="w-full h-full object-cover">
@@ -153,20 +153,29 @@
                                     </a>
                                 </div>
 
+                                <?php $min_qty = $product_view['minimum_kilo'];?>
                                 <div>
                                     <h1 class="text-gray-500 text-sm">Quantity</h1>
                                 </div>
                                 <div class="col-span-3 flex items-center gap-2">
-                                    <div class="flex items-center ">
-                                        <button type="button" onclick="document.getElementById('qty').value > 1 ? document.getElementById('qty').value-- : ''; document.getElementById('buy_button').href = './checkout.php?0=<?php echo $_GET['id'] ?>&qty0='+document.getElementById('qty').value" class="w-7 h-7 border border-gray-300 p-2">
-                                            <svg class="w-full h-full" enable-background="new 0 0 10 10" viewBox="0 0 10 10" x="0" y="0" class="shopee-svg-icon"><polygon points="4.5 4.5 3.5 4.5 0 4.5 0 5.5 3.5 5.5 4.5 5.5 10 5.5 10 4.5"></polygon></svg>
+                                    <div class="flex items-center">
+                                        <!-- Decrement Button -->
+                                        <button type="button" onclick="decrementQty();" class="w-7 h-7 border border-gray-300 p-2">
+                                            <svg class="w-full h-full" enable-background="new 0 0 10 10" viewBox="0 0 10 10"><polygon points="4.5 4.5 3.5 4.5 0 4.5 0 5.5 3.5 5.5 4.5 5.5 10 5.5 10 5.5 5.5 10 5.5"></polygon></svg>
                                         </button>
-                                        <input name="qty" id="qty" class="input input-sm border border-gray-300 h-7 max-w-[4em] rounded-none bg-neutral text-center" value="1" type="number" min="1" oninput="this.value <= 0 ? this.value = 1 : Math.abs(this.value); document.getElementById('buy_button').href = './checkout.php?0=<?php echo $_GET['id'] ?>&qty0='+this.value" />
-                                        <button type="button" onclick="document.getElementById('qty').value++; document.getElementById('buy_button').href = './checkout.php?0=<?php echo $_GET['id'] ?>&qty0='+document.getElementById('qty').value" class="w-7 h-7 border border-gray-300 p-2">
-                                            <svg class="w-full h-full" enable-background="new 0 0 10 10" viewBox="0 0 10 10" x="0" y="0" class="shopee-svg-icon icon-plus-sign"><polygon points="10 4.5 5.5 4.5 5.5 0 4.5 0 4.5 4.5 0 4.5 0 5.5 4.5 5.5 4.5 10 5.5 10 5.5 5.5 10 5.5"></polygon></svg>
+                                        <!-- Quantity Input -->
+                                        <input name="qty" id="qty" class="input input-sm border border-gray-300 h-7 max-w-[4em] rounded-none bg-neutral text-center" value="<?php echo $min_qty; ?>" type="number" min="<?php echo $min_qty; ?>" oninput="validateQty();" />
+                                        <!-- Increment Button -->
+                                        <button type="button" onclick="document.getElementById('qty').value++; updateCheckoutLink();" class="w-7 h-7 border border-gray-300 p-2">
+                                            <svg class="w-full h-full" enable-background="new 0 0 10 10" viewBox="0 0 10 10"><polygon points="10 4.5 5.5 4.5 5.5 0 4.5 0 4.5 4.5 0 4.5 0 5.5 4.5 5.5 4.5 10 5.5 10 5.5 5.5 10 5.5"></polygon></svg>
                                         </button>
                                     </div>
-                                    <h1 class="text-gray-400 text-sm"><?php echo $product_view['available'] ?> pieces available</h1>
+                                    <h1 class="text-gray-400 text-sm"><?php echo $product_view['current_stock'] ?> pieces available</h1>
+                                </div>
+
+                                <!-- Error Message Container -->
+                                <div id="error-msg" class="hidden fixed mt-20 top-5 left-[50%] w-auto max-w-[400px] translate-x-[-50%] px-4 py-2 bg-red-100 border border-red-400 text-red-700 rounded">
+                                    <span>Quantity cannot be less than <?php echo $min_qty; ?>.</span>
                                 </div>
                             </div>
                         </div>
@@ -281,38 +290,36 @@
         </div> -->
         <!-- END OF FEEDBACK -->
 
-        <div class="my-10">
-            <div class="flex items-center">
-                <h1 class="font-bold opacity-80">SIMILAR PRODUCT</h1>
-                <!-- <a href="" class="link link-primary flex items-center">See all
-                    <svg class="w-4 h-4" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title></title> <g id="Complete"> <g id="F-Chevron"> <polyline fill="none" id="Right" points="8.5 5 15.5 12 8.5 19" stroke="hsl(var(--p))" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></polyline> </g> </g> </g></svg>
-                </a> -->
+        <div class="my-10 mx-5">
+            <div class="flex items-center justify-between">
+                <h1 class="font-bold opacity-80 text-lg sm:text-xl">SIMILAR PRODUCT</h1>
             </div>
-            <div class="w-full grid grid-cols-5 py-4 gap-5">
+            <div class="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 py-4 gap-5">
 
-                    <?php
-                        $records = $crud->search("product", $product_view['type'], ['type']);
-                        if ($records) {
-                            for ($i = 0; $i < count($records) && $i < 20; $i++) {
-                                echo '
-                                    <div class="flex flex-col justify-center items-center w-full gap-1 bg-neutral">
-                                        <div class="w-full aspect-square bg-gray-300 rounded-t-lg overflow-hidden">
-                                            <img src="/AgriLink/assets/products/'.$records[$i]['image'].'" class="w-full h-full object-cover" />
-                                        </div>
-                                        <h1 class="text-sm font-bold text-neutral-content break-words text-center">'.(strlen($records[$i]['name']) <= 17 ? $records[$i]['name'] : substr($records[$i]['name'], 0, 17)."...").'</h1>
-                                        <div class="w-full flex justify-between font-semibold items-center px-2">
-                                            <p class="text-primary">₱'.number_format(round((int)$records[$i]['price'] - ((int)$records[$i]['price']*((int)$records[$i]['discount'])/100))).'.00</p>
-                                            <span class="text-neutral-content opacity-70 text-xs">'.((int)$records[$i]['sold']).' sold</span>
-                                        </div>
-                                        <a href="/AgriLink/product.php?id='.$records[$i]['id'].'" class="rounded-t-none btn btn-primary btn-sm col-span-2 w-full">View Product</a>
+                <?php
+                    $records = $crud->search("product", $product_view['type'], ['type']);
+                    if ($records) {
+                        for ($i = 0; $i < count($records) && $i < 20; $i++) {
+                            echo '
+                                <div class="flex flex-col justify-center items-center w-full gap-2 bg-neutral rounded-lg shadow-md overflow-hidden">
+                                    <div class="w-full aspect-square bg-gray-300 rounded-t-lg overflow-hidden">
+                                        <img src="/AgriLink/assets/products/'.$records[$i]['image'].'" class="w-full h-full object-cover" loading="lazy"/>
                                     </div>
-                                ';
-                            }
+                                    <h1 class="text-sm font-bold text-neutral-content text-center px-2 truncate max-w-full">'.(strlen($records[$i]['name']) <= 17 ? $records[$i]['name'] : substr($records[$i]['name'], 0, 17)."...").'</h1>
+                                    <div class="w-full flex justify-between font-semibold items-center px-3">
+                                        <p class="text-primary text-sm">₱'.number_format(round((int)$records[$i]['price'] - ((int)$records[$i]['price']*((int)$records[$i]['discount'])/100))).'.00</p>
+                                        <span class="text-neutral-content opacity-70 text-xs">'.((int)$records[$i]['sold']).' sold</span>
+                                    </div>
+                                    <a href="/AgriLink/product.php?id='.$records[$i]['id'].'" class="btn btn-primary btn-sm w-full rounded-b-lg">View Product</a>
+                                </div>
+                            ';
                         }
-                    ?>
+                    }
+                ?>
 
             </div>
         </div>
+
 
     </div>
     <!-- FOOTER -->
@@ -321,5 +328,35 @@
     ?>
     <!-- END OF FOOTER -->
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+    <script>
+        // Function to decrement quantity
+        function decrementQty() {
+            let qty = document.getElementById('qty');
+            if (qty.value > <?php echo $min_qty; ?>) {
+                qty.value--;
+                updateCheckoutLink();
+            } else {
+                showErrorMsg();
+            }
+        }
+
+        // Function to show error message
+        function showErrorMsg() {
+            let errorMsg = document.getElementById('error-msg');
+            errorMsg.classList.remove('hidden');
+            setTimeout(() => {
+                errorMsg.classList.add('hidden');
+            }, 3000); // Hide the message after 3 seconds
+        }
+
+        // Function to validate quantity on input
+        function validateQty() {
+            let qty = document.getElementById('qty');
+            if (qty.value < <?php echo $min_qty; ?>) {
+                qty.value = <?php echo $min_qty; ?>;
+                showErrorMsg();
+            }
+        }
+    </script>
 </body>
 </html>

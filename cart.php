@@ -29,7 +29,7 @@
         include "./components/navbar.php";
     ?>
 
-    <div class="max-w-[965px] mx-auto mt-[5%] pb-[30%]">
+    <div class="max-w-[965px] mx-auto mt-[5%]">
         <h1 class="font-bold text-3xl text-center text-neutral-content py-5">CART</h1>
         <form action="/AgriLink/modules/remove_cart.php" method="post" onkeydown="return event.key != 'Enter';">
         <?php
@@ -105,7 +105,7 @@
                     <h1 class="" id="items">Total item (<?php echo $records ? 1 : 0 ?>):</h1>
                     <span class="text-xl text-primary font-semibold" id="price">₱0.00</span>
                 </div>
-                <a href="" class="btn btn-primary w-36" id="check_out" disabled>Check out</a>
+                <a href="" class="btn btn-primary w-36" id="check_out">Check out</a>
             </div>
         </div>
         <div class="my-10">
@@ -236,12 +236,12 @@
                     }
                 } 
                 document.getElementById("items").innerHTML = "Total item ("+k+"):";
-                if(k < 3) {
-                    document.getElementById("check_out").setAttribute("disabled", "");
+                // if(k < 3) {
+                //     document.getElementById("check_out").setAttribute("disabled", "");
                     
-                } else {
-                    document.getElementById("check_out").removeAttribute("disabled");
-                }
+                // } else {
+                //     document.getElementById("check_out").removeAttribute("disabled");
+                // }
             }
 
 
