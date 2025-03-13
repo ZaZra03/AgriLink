@@ -93,92 +93,88 @@
 
 
             <!-- Chart Section (Hidden by Default) -->
+            <!-- UPDATE -->
             <div id="chartSection" class="mt-10 hidden w-full">
-    <h2 class="text-xl font-semibold text-center mb-4">Stock Overview</h2>
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="w-full h-[400px]"><canvas id="porkChart"></canvas></div>
-        <div class="w-full h-[400px]"><canvas id="tilapiaChart"></canvas></div>
-        <div class="w-full h-[400px]"><canvas id="beefChart"></canvas></div>
-        <div class="w-full h-[400px]"><canvas id="sayoteChart"></canvas></div>
-        <div class="w-full h-[400px]"><canvas id="gabiChart"></canvas></div>
-    </div>
-</div>
-
+                <h2 class="text-xl font-semibold text-center mb-4">Stock Overview</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="w-full h-[400px]"><canvas id="riceChart"></canvas></div>
+                    <div class="w-full h-[400px]"><canvas id="porkChart"></canvas></div>
+                    <div class="w-full h-[400px]"><canvas id="tilapiaChart"></canvas></div>
+                    <div class="w-full h-[400px]"><canvas id="tomatoesChart"></canvas></div>
+                    <div class="w-full h-[400px]"><canvas id="onionsChart"></canvas></div>
+                </div>
+            </div>
         </div>
     </div>
-
-
 
     <?php include "./components/footer.php"; ?>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
     <script>
-document.addEventListener("DOMContentLoaded", function () {
-    let porkChart, tilapiaChart, beefChart, sayoteChart, gabiChart; // Store chart instances
+        document.addEventListener("DOMContentLoaded", function () {
+            let riceChart, porkChart, tilapiaChart, tomatoesChart, onionsChart; // Store chart instances
 
-    const productsBtn = document.getElementById("productsBtn");
-    const graphBtn = document.getElementById("graphBtn");
-    const productsSection = document.getElementById("productsSection");
-    const chartSection = document.getElementById("chartSection");
+            const productsBtn = document.getElementById("productsBtn");
+            const graphBtn = document.getElementById("graphBtn");
+            const productsSection = document.getElementById("productsSection");
+            const chartSection = document.getElementById("chartSection");
 
-    const datasets = {
-        pork: [120, 95, 140, 110, 130, 150],
-        tilapia: [80, 100, 90, 85, 95, 105],
-        beef: [60, 75, 70, 65, 80, 85],
-        sayote: [200, 180, 190, 210, 220, 230],
-        gabi: [50, 55, 60, 45, 50, 65]
-    };
+            const datasets = {
+                rice: [500, 550, 470, 530, 600, 520, 580, 490, 620, 560, 640, 510],
+                pork: [120, 90, 150, 130, 80, 170, 140, 190, 160, 200, 180, 220],
+                tilapia: [80, 110, 70, 95, 130, 85, 120, 90, 140, 100, 125, 75],
+                tomatoes: [200, 170, 250, 190, 300, 220, 270, 210, 330, 240, 290, 180],
+                onions: [50, 80, 40, 65, 100, 55, 90, 45, 110, 60, 95, 50]
+            };
 
-    const months = ["January", "February", "March", "April", "May", "June"];
 
-    function createChart(canvasId, label, data, color) {
-        const ctx = document.getElementById(canvasId).getContext("2d");
-        return new Chart(ctx, {
-            type: "bar",
-            data: {
-                labels: months,
-                datasets: [{
-                    label: label,
-                    data: data,
-                    backgroundColor: color,
-                    borderColor: color.replace("0.6", "1"),
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: true
+
+            const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+            function createChart(canvasId, label, data, color) {
+                const ctx = document.getElementById(canvasId).getContext("2d");
+                return new Chart(ctx, {
+                    type: "bar",
+                    data: {
+                        labels: months,
+                        datasets: [{
+                            label: label,
+                            data: data,
+                            backgroundColor: color,
+                            borderColor: color.replace("0.6", "1"),
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
                     }
-                }
+                });
             }
+
+            function renderCharts() {
+                if (!riceChart) riceChart = createChart("riceChart", "Rice", datasets.rice, "rgba(255, 159, 64, 0.6)");
+                if (!porkChart) porkChart = createChart("porkChart", "Pork", datasets.pork, "rgba(255, 99, 132, 0.6)");
+                if (!tilapiaChart) tilapiaChart = createChart("tilapiaChart", "Tilapia", datasets.tilapia, "rgba(54, 162, 235, 0.6)");
+                if (!tomatoesChart) tomatoesChart = createChart("tomatoesChart", "Tomatoes", datasets.tomatoes, "rgba(255, 206, 86, 0.6)");
+                if (!onionsChart) onionsChart = createChart("onionsChart", "Onions", datasets.onions, "rgba(75, 192, 192, 0.6)");
+            }
+
+            productsBtn.addEventListener("click", function () {
+                productsSection.classList.remove("hidden");
+                chartSection.classList.add("hidden");
+            });
+
+            graphBtn.addEventListener("click", function () {
+                productsSection.classList.add("hidden");
+                chartSection.classList.remove("hidden");
+                renderCharts();
+            });
         });
-    }
-
-    function renderCharts() {
-        if (!porkChart) porkChart = createChart("porkChart", "Pork", datasets.pork, "rgba(255, 99, 132, 0.6)");
-        if (!tilapiaChart) tilapiaChart = createChart("tilapiaChart", "Tilapia", datasets.tilapia, "rgba(54, 162, 235, 0.6)");
-        if (!beefChart) beefChart = createChart("beefChart", "Beef", datasets.beef, "rgba(255, 206, 86, 0.6)");
-        if (!sayoteChart) sayoteChart = createChart("sayoteChart", "Sayote", datasets.sayote, "rgba(75, 192, 192, 0.6)");
-        if (!gabiChart) gabiChart = createChart("gabiChart", "Gabi", datasets.gabi, "rgba(153, 102, 255, 0.6)");
-    }
-
-    productsBtn.addEventListener("click", function () {
-        productsSection.classList.remove("hidden");
-        chartSection.classList.add("hidden");
-    });
-
-    graphBtn.addEventListener("click", function () {
-        productsSection.classList.add("hidden");
-        chartSection.classList.remove("hidden");
-        renderCharts();
-    });
-});
-
-
-
     </script>
 </body>
 </html>
