@@ -155,7 +155,7 @@
 
                                 <?php $min_qty = $product_view['minimum_kilo'];?>
                                 <div>
-                                    <h1 class="text-gray-500 text-sm">Quantity</h1>
+                                    <h1 class="text-gray-500 text-sm">Quantity (kg)</h1>
                                 </div>
                                 <div class="col-span-3 flex items-center gap-2">
                                     <div class="flex items-center">
@@ -175,7 +175,7 @@
 
                                 <!-- Error Message Container -->
                                 <div id="error-msg" class="hidden fixed mt-20 top-5 left-[50%] w-auto max-w-[400px] translate-x-[-50%] px-4 py-2 bg-red-100 border border-red-400 text-red-700 rounded">
-                                    <span>Quantity cannot be less than <?php echo $min_qty; ?>.</span>
+                                    <span>Quantity cannot be less than <?php echo $min_qty; ?> kilo.</span>
                                 </div>
                             </div>
                         </div>
