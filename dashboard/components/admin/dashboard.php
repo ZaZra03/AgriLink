@@ -59,7 +59,7 @@
                     <span class="text-xl font-bold leading-none text-gray-900 sm:text-2xl ">
                         ₱<?php echo $count * 5.46;; ?>
                     </span>
-                    <h3 class="text-base font-light text-gray-500">Sales this week</h3>
+                    <h3 class="text-base font-light text-gray-500">Total Transaction Fee</h3>
                 </div>
                 <div class="flex items-center justify-end flex-1 text-base font-medium 
                     <?php echo $percentageChange >= 0 ? 'text-green-500' : 'text-red-500'; ?>">

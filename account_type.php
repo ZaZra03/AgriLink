@@ -42,23 +42,30 @@
         }
     ?>
     
-    <main class="bg-base-100 :bg-gray-900">
-        <div class="flex flex-col items-center px-6 pt-20 mx-auto md:h-screen pt:mt-0 :bg-gray-900">
-            <a href="/AgriLink/index.php" class="normal-case text-xl mb-10">
-                <img src="./assets/images/logo.png" class="w-44 h-44" alt="">
+    <main class="bg-base-100 min-h-screen flex items-center justify-center px-6">
+        <div class="flex flex-col items-center w-full max-w-lg mx-auto text-center">
+            <!-- Logo -->
+            <a href="/AgriLink/index.php" class="mb-10">
+                <img src="./assets/images/logo.png" class="w-32 h-32 sm:w-44 sm:h-44" alt="Logo">
             </a>
+
             <!-- Card -->
-            <div class="w-full max-w-xl p-6 h-[20em] space-y-8 sm:p-8 bg-white rounded-2xl shadow :bg-gray-800 flex flex-col items-center justify-center">
-                <h2 class="text-3xl font-bold text-base-content :text-white">
+            <div class="w-full bg-white rounded-2xl shadow-lg p-6 sm:p-8 flex flex-col items-center space-y-6">
+                <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">
                     Create Your Account
                 </h2>
-                <div class="flex flex-col gap-6 w-full max-w-sm">
-                    <a href="./signup_seller.php" type="submit" class="text-center border-2 border-primary p-4 text-2xl hover:bg-primary hover:text-white transition-all duration-200 text-primary font-bold rounded-full">Seller</a>
-                    <a href="./signup_buyer.php" type="submit" class="text-center border-2 border-primary p-4 text-2xl hover:bg-primary hover:text-white transition-all duration-200 text-primary font-bold rounded-full">Buyer</a>
+                <div class="grid gap-4 w-full max-w-sm">
+                    <a href="./signup_seller.php" class="text-center border-2 border-primary px-6 py-3 text-lg sm:text-2xl hover:bg-primary hover:text-white transition-all duration-200 text-primary font-bold rounded-full">
+                        Seller
+                    </a>
+                    <a href="./signup_buyer.php" class="text-center border-2 border-primary px-6 py-3 text-lg sm:text-2xl hover:bg-primary hover:text-white transition-all duration-200 text-primary font-bold rounded-full">
+                        Buyer
+                    </a>
                 </div>
             </div>
         </div>
     </main>
+
 
 
     <!-- <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script> -->

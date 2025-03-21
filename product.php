@@ -67,7 +67,35 @@
                 }
             </style>
             ';
-        } else if (isset($_GET['status']) && $_GET['status'] == "success") {
+        }
+        
+        if(isset($_GET['status']) && $_GET['status'] == "checkout-error") {
+            echo '
+            <div id="error" class="alert alert-error flex fixed mt-20 top-5 left-[50%] w-auto max-w-[400px] translate-x-[-50%] px-4 py-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <span>Quantity exceeds available stock.</span>
+            </div>
+            <style>
+                #error {
+                    opacity: 0;
+                    transition: all;
+                    animation-name: error;
+                    animation-duration: 4s;
+                }
+        
+                @keyframes error {
+                    0%, 80% {
+                        display: block;
+                        opacity: 1;
+                    }
+                    100% {
+                        opacity: 0;
+                    }
+                }
+            </style>
+            ';
+        } 
+        else if (isset($_GET['status']) && $_GET['status'] == "success") {
             echo '
             <div id="success" class="alert alert-success flex fixed mt-20 top-5 left-[50%] w-auto max-w-[400px] translate-x-[-50%] px-4 py-2">
                 <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
@@ -153,7 +181,10 @@
                                     </a>
                                 </div>
 
-                                <?php $min_qty = $product_view['minimum_kilo'];?>
+                                <?php 
+                                    $min_qty = $product_view['minimum_kilo'];
+                                    $current_stock = $product_view['current_stock'];
+                                ?>
                                 <div>
                                     <h1 class="text-gray-500 text-sm">Quantity (kg)</h1>
                                 </div>
@@ -170,7 +201,7 @@
                                             <svg class="w-full h-full" enable-background="new 0 0 10 10" viewBox="0 0 10 10"><polygon points="10 4.5 5.5 4.5 5.5 0 4.5 0 4.5 4.5 0 4.5 0 5.5 4.5 5.5 4.5 10 5.5 10 5.5 5.5 10 5.5"></polygon></svg>
                                         </button>
                                     </div>
-                                    <h1 class="text-gray-400 text-sm"><?php echo $product_view['current_stock'] ?> pieces available</h1>
+                                    <h1 class="text-gray-400 text-sm"><?php echo $product_view['current_stock'] ?> kilo/s available</h1>
                                 </div>
 
                                 <!-- Error Message Container -->
@@ -182,6 +213,7 @@
                         <div class="flex gap-4 mt-4">
                             <input type="hidden" name="id" value="<?php echo $_GET['id'] ?>">
                             <input type="hidden" name="buyer_id" value="<?php echo $user['id'] ?>">
+                            <input type="hidden" name="current_stock" value="<?php echo $current_stock ?>">
                             <?php
                                 if (isset($_SESSION['user_id'])) {
                                     echo '
@@ -189,8 +221,6 @@
                                             <svg class="w-5 h-5 " viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="hsl(var(--p))"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>cart_plus_round [#1158]</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Dribbble-Light-Preview" transform="translate(-100.000000, -3039.000000)" fill="hsl(var(--p))"> <g id="icons" transform="translate(56.000000, 160.000000)"> <path d="M49.0001956,2883 C49.5521956,2883 50.0001956,2883.448 50.0001956,2884 C50.0001956,2884.552 49.5521956,2885 49.0001956,2885 L48.0001956,2885 L48.0001956,2886 C48.0001956,2886.552 47.5521956,2887 47.0001956,2887 C46.4481956,2887 46.0001956,2886.552 46.0001956,2886 L46.0001956,2885 L45.0001956,2885 C44.4481956,2885 44.0001956,2884.552 44.0001956,2884 C44.0001956,2883.448 44.4481956,2883 45.0001956,2883 L46.0001956,2883 L46.0001956,2882 C46.0001956,2881.448 46.4481956,2881 47.0001956,2881 C47.5521956,2881 48.0001956,2881.448 48.0001956,2882 L48.0001956,2883 L49.0001956,2883 Z M59.0001956,2897 C58.4491956,2897 58.0001956,2896.551 58.0001956,2896 C58.0001956,2895.339 58.4531956,2895.145 59.0001956,2894.951 C59.5471956,2895.145 60.0001956,2895.339 60.0001956,2896 C60.0001956,2896.551 59.5511956,2897 59.0001956,2897 L59.0001956,2897 Z M47.0001956,2897 C46.4491956,2897 46.0001956,2896.551 46.0001956,2896 C46.0001956,2895.339 46.4531956,2895.145 47.0001956,2894.951 C47.5471956,2895.145 48.0001956,2895.339 48.0001956,2896 C48.0001956,2896.551 47.5511956,2897 47.0001956,2897 L47.0001956,2897 Z M60.0001956,2882 C60.0001956,2881.448 60.4481956,2881 61.0001956,2881 L63.0001956,2881 C63.5521956,2881 64.0001956,2880.552 64.0001956,2880 C64.0001956,2879.448 63.5521956,2879 63.0001956,2879 L60.0001956,2879 C58.8951956,2879 58.0001956,2879.895 58.0001956,2881 L58.0001956,2891 L48.0001956,2891 C46.8951956,2891 46.0001956,2891.895 46.0001956,2893 L46.0001956,2893.184 C44.6631956,2893.659 43.7561956,2895.041 44.0581956,2896.6 C44.2871956,2897.777 45.2561956,2898.734 46.4361956,2898.948 C48.3411956,2899.295 50.0001956,2897.842 50.0001956,2896 C50.0001956,2894.696 49.1631956,2893.597 48.0001956,2893.184 L48.0001956,2893 L58.0001956,2893 L58.0001956,2893.184 C56.6631956,2893.659 55.7561956,2895.041 56.0581956,2896.6 C56.2871956,2897.777 57.2561956,2898.734 58.4361956,2898.948 C60.3411956,2899.295 62.0001956,2897.842 62.0001956,2896 C62.0001956,2894.696 61.1631956,2893.597 60.0001956,2893.184 L60.0001956,2882 Z" id="cart_plus_round-[#1158]"> </path> </g> </g> </g> </g></svg>
                                             <h1>Add to cart</h1>
                                         </button>
-
-                                        
                                     ';
                                 } else {
                                     echo '
@@ -216,6 +246,23 @@
             </div>
         </div>
         <!-- END OF PRODUCT DESCRIPTION -->
+
+        <div class="mx-5 w-full mt-10 bg-white p-6 rounded-lg shadow-lg flex items-center justify-between">
+            <!-- Seller Info (Left) -->
+            <div class="flex items-center space-x-4">
+                <img class="w-10 h-10 rounded-full border border-gray-300" 
+                    src="<?php echo isset($seller) && $seller !== null && isset($seller['image']) ? '/AgriLink/assets/users/'.$seller['image'] : './assets/images/default_avatar.png'; ?>" 
+                    alt="user photo">
+                <p class="font-semibold text-gray-800 text-lg"><?php echo $seller['name']; ?></p>
+            </div>
+
+            <!-- View Store Button (Right) -->
+            <a href="/AgriLink/seller.php?id=<?php echo $seller['id']; ?>" class="inline-block">
+                <button class="bg-blue-600 text-white px-5 py-2.5 rounded-lg font-medium shadow-md transition-all duration-300 hover:bg-blue-700 hover:shadow-lg">
+                    View Store
+                </button>
+            </a>
+        </div>
 
         <!-- FEEDBACK -->
         <!-- <div id="feedback" class="p-5 bg-neutral mt-5">

@@ -319,7 +319,7 @@
     <!-- END OF TABLE -->
 
 </div>
-<script>
+<!-- <script>
     let originalValue = null; // Store the original value
 
     document.getElementById('price').addEventListener('focus', function() {
@@ -335,4 +335,4 @@
         }
         this.value = value + 50; // Show modified value on blur
     });
-</script>
+</script> -->

@@ -17,6 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AgriLink</title>
     <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
     <script src="./javascript/tailwind.js"></script>
     <link rel="stylesheet" href="./assets/css/daisyui.css">
     <link rel="stylesheet" href="./assets/css/config.css">
@@ -243,7 +244,5 @@
     ?>
     <!-- END OF FOOTER -->
     
-
-    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
 </body>
 </html>

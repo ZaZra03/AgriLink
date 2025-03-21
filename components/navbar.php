@@ -43,186 +43,134 @@
             </div>
         </form>
 
-        <!-- <form action="/Agrilink-Org/search.php"
-            class="h-10 bg-neutral w-full max-w-[40em] flex justify-between items-center px-3 gap-2 rounded-md">
-            <input type="text" name="search" style="border: none; outline: none;" class="bg-neutral w-full"
-                value="<?php echo isset($_GET['search']) ? $_GET['search'] : "" ?>">
-            <button class="w-5 h-5">
-                <img src="/Agrilink-Org/assets/icons/searchicon.png" alt="">
-            </button>
-        </form> -->
-
         <div class="flex items-center">
             <div class="flex items-center ms-3">
                 <?php
                     if (isset($_SESSION['user_id'])) {
                         echo '
-                            <div class="dropdown dropdown-end mt-2 mr-7">
-                                <label tabindex="0" class="cursor-pointer ' . ($_SESSION['role'] == "seller" ? "hidden" : "block") . '">
-                                    <div class="indicator">
-                                        <img src="/AgriLink/assets/icons/shoppingcart.png" class="w-5 h-5" alt="">
-                                        ' . ($crud->search("cart", $user['id'], ['buyer_id']) ? 
-                                            '<span class="badge badge-sm indicator-item">' . count($crud->search("cart", $user['id'], ['buyer_id'])) . '</span>' : 
-                                            "") . '
-                                    </div>
-                                </label>
-                                
-                                <div tabindex="0" class="mt-3 card card-compact dropdown-content bg-neutral shadow z-[99999] ' . ($_SESSION['role'] == "seller" ? "hidden" : "block") . '">
-                                    <div class="p-3">
-                                        <span class="font-semibold opacity-70">Recently Added Products</span>';
-
+                        <div class="dropdown dropdown-end mt-2 mr-7">
+                            <label tabindex="0" class="cursor-pointer ' . ($_SESSION['role'] == "seller" ? "hidden" : "block") . '">
+                                <div class="indicator">
+                                    <img src="/AgriLink/assets/icons/shoppingcart.png" class="w-5 h-5" alt="">
+                                    ' . ($crud->search("cart", $user['id'], ['buyer_id']) ? 
+                                        '<span class="badge badge-sm indicator-item">' . count($crud->search("cart", $user['id'], ['buyer_id'])) . '</span>' : 
+                                        "") . '
+                                </div>
+                            </label>
+                            <div tabindex="0" class="mt-3 card card-compact dropdown-content bg-neutral shadow z-[99999] ' . ($_SESSION['role'] == "seller" ? "hidden" : "block") . '">
+                                <div class="p-3">
+                                    <span class="font-semibold opacity-70">Recently Added Products</span>';
+                        
                         $totalCart = $crud->search("cart", $user['id'], ['buyer_id']);
                         $subtotal = 0;
-
+                        
                         if ($totalCart) {
-                            // Loop through the cart to calculate the subtotal
                             foreach ($totalCart as $cart) {
                                 $product = $crud->read("product", $cart['product_id']);
                                 $productPrice = (int)$product['price'];
                                 $productDiscount = (int)$product['discount'];
                                 $productQty = (int)$cart['qty'];
-
-                                // Calculate discounted price and add to subtotal
+                                
                                 $discountedPrice = $productPrice - ($productPrice * $productDiscount / 100);
                                 $subtotal += $discountedPrice * $productQty;
                             }
-
-                            // Display the first 4 products in the cart
+                            
                             for ($i = 0; $i < 4 && $i < count($totalCart); $i++) {
                                 $cart = $totalCart[$i];
                                 $show_product = $crud->read("product", $cart['product_id']);
                                 $productPrice = (int)$show_product['price'];
                                 $productDiscount = (int)$show_product['discount'];
                                 $productQty = (int)$cart['qty'];
-
-                                // Calculate the price for this product in the cart
+                                
                                 $discountedPrice = $productPrice - ($productPrice * $productDiscount / 100);
                                 $totalPrice = $discountedPrice * $productQty;
-
+                                
                                 echo '
-                                    <a href="/AgriLink/product.php?id=' . $show_product['id'] . '" class="grid grid-cols-4 hover:bg-neutral-focus p-2 items-center justify-between m-1 w-96">
-                                        <div class="w-full col-span-3 grid grid-cols-5 gap-2 font-semibold">
-                                            <img src="/AgriLink/assets/products/' . $show_product['image'] . '" class="h-full w-full aspect-square object-cover">
-                                            <div class="col-span-4">
-                                                <h1>' . $show_product['name'] . '</h1>
-                                            </div>
+                                <a href="/AgriLink/product.php?id=' . $show_product['id'] . '" class="grid grid-cols-4 hover:bg-neutral-focus p-2 items-center justify-between m-1 w-96">
+                                    <div class="w-full col-span-3 grid grid-cols-5 gap-2 font-semibold">
+                                        <img src="/AgriLink/assets/products/' . $show_product['image'] . '" class="h-full w-full aspect-square object-cover">
+                                        <div class="col-span-4">
+                                            <h1>' . $show_product['name'] . '</h1>
                                         </div>
-                                        <h1 class="text-primary text-end">₱' . number_format(round($totalPrice)) . '</h1>
-                                    </a>';
+                                    </div>
+                                    <h1 class="text-primary text-end">₱' . number_format(round($totalPrice)) . '</h1>
+                                </a>';
                             }
                         } else {
                             echo '
                                 <div class="bg-neutral w-96 h-36 my-4 flex flex-col justify-center gap-3 items-center">
-                                    <svg class="w-12 h-12" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" xml:space="preserve" fill="#000000">
-                                        <g id="SVGRepo_iconCarrier">
-                                            <path class="cubies_zeventien" d="M29,32H3c-1.657,0-3-1.343-3-3V3c0-1.657,1.343-3,3-3h26c1.657,0,3,1.343,3,3v26 C32,30.657,30.657,32,29,32z"></path>
-                                            <path class="cubies_achtien" d="M27,32H3c-1.657,0-3-1.343-3-3V3c0-1.657,1.343-3,3-3h24c1.657,0,3,1.343,3,3v26 C30,30.657,28.657,32,27,32z"></path>
-                                        </g>
-                                    </svg>
+                                    <svg class="w-12 h-12" version="1.1" id="Uploaded to svgrepo.com" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css"> .cubies_zeventien{fill:#EC9B5A;} .cubies_achtien{fill:#EDB57E;} .cubies_zevenentwintig{fill:#98D3BC;} .cubies_achtentwintig{fill:#CCE2CD;} .cubies_drie{fill:#837F79;} .cubies_elf{fill:#E3D4C0;} .cubies_twaalf{fill:#FFF2DF;} .st0{fill:#C9483A;} .st1{fill:#D97360;} .st2{fill:#F9E0BD;} .st3{fill:#F2C99E;} .st4{fill:#65C3AB;} .st5{fill:#4C4842;} .st6{fill:#67625D;} .st7{fill:#EDEAE5;} .st8{fill:#C9C6C0;} .st9{fill:#E69D8A;} .st10{fill:#2EB39A;} .st11{fill:#BCD269;} .st12{fill:#D1DE8B;} .st13{fill:#A5A29C;} .st14{fill:#8E7866;} .st15{fill:#725A48;} .st16{fill:#F2C7B5;} .st17{fill:#A4C83F;} </style> <g> <path class="cubies_zeventien" d="M29,32H3c-1.657,0-3-1.343-3-3V3c0-1.657,1.343-3,3-3h26c1.657,0,3,1.343,3,3v26 C32,30.657,30.657,32,29,32z"></path> <path class="cubies_achtien" d="M27,32H3c-1.657,0-3-1.343-3-3V3c0-1.657,1.343-3,3-3h24c1.657,0,3,1.343,3,3v26 C30,30.657,28.657,32,27,32z"></path> <path class="cubies_elf" d="M25,28H5c-0.552,0-1-0.448-1-1V5c0-0.552,0.448-1,1-1h20c0.552,0,1,0.448,1,1v22 C26,27.552,25.552,28,25,28z"></path> <path class="cubies_twaalf" d="M24,28H5c-0.552,0-1-0.448-1-1V5c0-0.552,0.448-1,1-1h19c0.552,0,1,0.448,1,1v22 C25,27.552,24.552,28,24,28z"></path> <path class="cubies_zevenentwintig" d="M20,6H10C9.448,6,9,5.552,9,5V3c0-0.552,0.448-1,1-1h1l0.724-1.447 C11.893,0.214,12.239,0,12.618,0h4.764c0.379,0,0.725,0.214,0.894,0.553L19,2h1c0.552,0,1,0.448,1,1v2C21,5.552,20.552,6,20,6z"></path> <path class="cubies_achtentwintig" d="M19,6h-9C9.448,6,9,5.552,9,5V3c0-0.552,0.448-1,1-1h1l0.724-1.447 C11.893,0.214,12.239,0,12.618,0h3.764c0.379,0,0.725,0.214,0.894,0.553L18,2h1c0.552,0,1,0.448,1,1v2C20,5.552,19.552,6,19,6z"></path> <path class="cubies_drie" d="M19.5,12h-10C9.224,12,9,11.776,9,11.5S9.224,11,9.5,11h10c0.276,0,0.5,0.224,0.5,0.5 S19.776,12,19.5,12z M20,13.5c0-0.276-0.224-0.5-0.5-0.5h-10C9.224,13,9,13.224,9,13.5S9.224,14,9.5,14h10 C19.776,14,20,13.776,20,13.5z M20,15.5c0-0.276-0.224-0.5-0.5-0.5h-10C9.224,15,9,15.224,9,15.5S9.224,16,9.5,16h10 C19.776,16,20,15.776,20,15.5z M20,17.5c0-0.276-0.224-0.5-0.5-0.5h-10C9.224,17,9,17.224,9,17.5S9.224,18,9.5,18h10 C19.776,18,20,17.776,20,17.5z M17,19.5c0-0.276-0.224-0.5-0.5-0.5h-7C9.224,19,9,19.224,9,19.5S9.224,20,9.5,20h7 C16.776,20,17,19.776,17,19.5z"></path> </g> </g></svg>
+                        
                                     <h1>No products found</h1>
                                 </div>';
                         }
-
+                        
                         echo '
-                            <div class="flex items-center justify-between">
-                                <span class="font-semibold text-xs">' . 
-                                    count($totalCart) . 
-                                    ' More Products In Cart</span>
-                                <span class="text-info">Subtotal: ₱' . number_format(round($subtotal)) . '</span>
-                            </div>';
-
+                        <div class="flex items-center justify-between">
+                            <span class="font-semibold text-xs">
+                                ' . (is_array($totalCart) ? count($totalCart) : 0) . ' More Products In Cart
+                            </span>
+                            <span class="text-info">
+                                Subtotal: ₱' . number_format(round((float) $subtotal)) . '
+                            </span>
+                        </div>';
+                        
                         if ($_SESSION['role'] != "seller") {
                             echo '
-                                <div class="card-actions">
-                                    <a href="/AgriLink/cart.php" class="btn btn-primary btn-sm">View cart</a>
-                                </div>';
+                            <div class="card-actions">
+                                <a href="/AgriLink/cart.php" class="btn btn-primary btn-sm">View cart</a>
+                            </div>';
                         }
-
-                        echo '
-                                    </div>
-                                </div>
-                            </div>
-                        ';
+                        
+                        echo '</div></div></div>';
                     }
                 ?>
                 <div>
-                <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 me-5" aria-expanded="false" data-dropdown-toggle="dropdown-user">
-                    <span class="sr-only">Open user menu</span>
-                    <img class="w-8 h-8 rounded-full" src="<?php echo isset($user) && $user !== null && isset($user['image']) ? '/AgriLink/assets/users/'.$user['image'] : './assets/images/default_avatar.png'; ?>" alt="user photo">
-                </button>
+                    <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 me-5" aria-expanded="false" data-dropdown-toggle="dropdown-user">
+                        <span class="sr-only">Open user menu</span>
+                        <img class="w-8 h-8 rounded-full" src="<?php echo isset($user) && $user !== null && isset($user['image']) ? '/AgriLink/assets/users/'.$user['image'] : './assets/images/default_avatar.png'; ?>" alt="user photo">
+                    </button>
                 </div>
-
                 <?php 
-                if (isset($_SESSION['user_id'])) {
-                    if ($_SESSION['role'] != "seller") {
-                    echo '
-                    <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-sm shadow-sm" id="dropdown-user">
-                        <div class="px-4 py-3" role="none">
-                            <p class="text-sm text-grey-800" role="none">
-                                ' . $user['name'] . '
-                            </p>
-                            <p class="text-sm font-medium text-grey-800 truncate" role="none">
-                                ' . $user['email'] . '
-                            </p>
-                        </div>
-                        <ul class="py-1" role="none">
-                            <li>
-                                <a href="/AgriLink/user.php" class="block px-4 py-2 text-sm text-grey-800 hover:bg-gray-100" role="menuitem">Account</a>
-                            </li>
-                            <li>
-                                <a href="/AgriLink/user.php?page=purchase" class="block px-4 py-2 text-sm text-grey-800 hover:bg-gray-100" role="menuitem">Purchase</a>
-                            </li>
-                            <li>
-                                <a href="/AgriLink/about_us.php" class="block px-4 py-2 text-sm text-grey-800 hover:bg-gray-100" role="menuitem">About Us</a>
-                            </li>
-                            <li>
-                                <a href="/AgriLink/modules/logout.php" class="block px-4 py-2 text-sm text-grey-800 hover:bg-gray-100" role="menuitem">Logout</a>
-                            </li>
-                        </ul>
-                    </div>';
+                    if (isset($_SESSION['user_id'])) {
+                        echo ($_SESSION['role'] != "seller") ? '<div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-sm shadow-sm" id="dropdown-user">
+                            <div class="px-4 py-3" role="none">
+                                <p class="text-sm text-grey-800" role="none">' . $user['name'] . '</p>
+                                <p class="text-sm font-medium text-grey-800 truncate" role="none">' . $user['email'] . '</p>
+                            </div>
+                            <ul class="py-1" role="none">
+                                <li><a href="/AgriLink/user.php" class="block px-4 py-2 text-sm text-grey-800 hover:bg-gray-100" role="menuitem">Account</a></li>
+                                <li><a href="/AgriLink/user.php?page=purchase" class="block px-4 py-2 text-sm text-grey-800 hover:bg-gray-100" role="menuitem">Purchase</a></li>
+                                <li><a href="/AgriLink/about_us.php" class="block px-4 py-2 text-sm text-grey-800 hover:bg-gray-100" role="menuitem">About Us</a></li>
+                                <li><a href="/AgriLink/modules/logout.php" class="block px-4 py-2 text-sm text-grey-800 hover:bg-gray-100" role="menuitem">Logout</a></li>
+                            </ul>
+                        </div>' : '<div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-sm shadow-sm" id="dropdown-user">
+                            <div class="px-4 py-3" role="none">
+                                <p class="text-sm text-grey-800" role="none">' . $user['id'] . '</p>
+                                <p class="text-sm font-medium text-grey-800 truncate" role="none">' . $user['email'] . '</p>
+                            </div>
+                            <ul class="py-1" role="none">
+                                <li><a href="/AgriLink/user.php" class="block px-4 py-2 text-sm text-grey-800 hover:bg-gray-100" role="menuitem">Account</a></li>
+                                <li><a href="/AgriLink/dashboard/admin.php" class="block px-4 py-2 text-sm text-grey-800 hover:bg-gray-100" role="menuitem">Dashboard</a></li>
+                                <li><a href="/AgriLink/about_us.php" class="block px-4 py-2 text-sm text-grey-800 hover:bg-gray-100" role="menuitem">About Us</a></li>
+                                <li><a href="/AgriLink/modules/logout.php" class="block px-4 py-2 text-sm text-grey-800 hover:bg-gray-100" role="menuitem">Logout</a></li>
+                            </ul>
+                        </div>';
                     } else {
-                    echo '
-                    <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-sm shadow-sm" id="dropdown-user">
-                        <div class="px-4 py-3" role="none">
-                            <p class="text-sm text-grey-800" role="none">
-                                ' . $user['id'] . '
-                            </p>
-                            <p class="text-sm font-medium text-grey-800 truncate" role="none">
-                                ' . $user['email'] . '
-                            </p>
-                        </div>
-                        <ul class="py-1" role="none">
-                            <li>
-                                <a href="/AgriLink/user.php" class="block px-4 py-2 text-sm text-grey-800 hover:bg-gray-100" role="menuitem">Account</a>
-                            </li>
-                            <li>
-                                <a href="/AgriLink/dashboard/admin.php" class="block px-4 py-2 text-sm text-grey-800 hover:bg-gray-100" role="menuitem">Dashboard</a>
-                            </li>
-                            <li>
-                                <a href="/AgriLink/about_us.php" class="block px-4 py-2 text-sm text-grey-800 hover:bg-gray-100" role="menuitem">About Us</a>
-                            </li>
-                            <li>
-                                <a href="/AgriLink/modules/logout.php" class="block px-4 py-2 text-sm text-grey-800 hover:bg-gray-100" role="menuitem">Logout</a>
-                            </li>
-                        </ul>
-                    </div>';
+                        echo '
+                        <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-sm shadow-sm" id="dropdown-user">
+                            <ul class="py-1" role="none">
+                                <li>
+                                    <a href="/AgriLink/about_us.php" class="block px-4 py-2 text-sm text-grey-800 hover:bg-gray-100" role="menuitem">About Us</a>
+                                </li>
+                                <li>
+                                    <a href="/AgriLink/login.php" class="block px-4 py-2 text-sm text-grey-800 hover:bg-gray-100" role="menuitem">Login</a>
+                                </li>
+                            </ul>
+                        </div>';
                     }
-
-                } else {
-                    echo '
-                    <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-sm shadow-sm" id="dropdown-user">
-                        <ul class="py-1" role="none">
-                            <li>
-                                <a href="/AgriLink/about_us.php" class="block px-4 py-2 text-sm text-grey-800 hover:bg-gray-100" role="menuitem">About Us</a>
-                            </li>
-                            <li>
-                                <a href="/AgriLink/login.php" class="block px-4 py-2 text-sm text-grey-800 hover:bg-gray-100" role="menuitem">Login</a>
-                            </li>
-                        </ul>
-                    </div>';
-                }
                 ?>
-          </div>
+            </div>
         </div>
     </div>
   </div>

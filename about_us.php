@@ -53,48 +53,51 @@
             </div>
         </div>
     </div>
-    <div class="pb-[20em] mt-10">
+    <div class="pb-[10em] mt-10">
         <div class="bg-[#577a29] py-20 flex flex-col gap-[10em]">
-            <div class="flex flex-col gap-5">
+            <div class="flex flex-col gap-5 items-center">
                 <h1 class="text-2xl font-bold mb-2 text-center text-primary-content">What We Offer</h1>
-                <div class="flex justify-center gap-5">
-                    <img src="assets/images/product1.png" class="rounded-full object-cover aspect-square h-[12em]" alt="">
-                    <img src="assets/images/product2.png" class="rounded-full object-cover aspect-square h-[12em]" alt="">
-                    <img src="assets/images/product3.png" class="rounded-full object-cover aspect-square h-[12em]" alt="">
-                    <img src="assets/images/product4.png" class="rounded-full object-cover aspect-square h-[12em]" alt="">
-                    <img src="assets/images/product5.png" class="rounded-full object-cover aspect-square h-[12em]" alt="">
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5 place-items-center">
+                    <img src="assets/images/product1.png" class="rounded-full object-cover aspect-square w-[8em] sm:w-[10em] md:w-[12em]" alt="">
+                    <img src="assets/images/product2.png" class="rounded-full object-cover aspect-square w-[8em] sm:w-[10em] md:w-[12em]" alt="">
+                    <img src="assets/images/product3.png" class="rounded-full object-cover aspect-square w-[8em] sm:w-[10em] md:w-[12em]" alt="">
+                    <img src="assets/images/product4.png" class="rounded-full object-cover aspect-square w-[8em] sm:w-[10em] md:w-[12em]" alt="">
+                    <img src="assets/images/product5.png" class="rounded-full object-cover aspect-square w-[8em] sm:w-[10em] md:w-[12em]" alt="">
                 </div>
             </div>
-            <div class="flex flex-col gap-5">
+
+
+            <div class="flex flex-col gap-5 items-center">
                 <h1 class="text-2xl font-bold mb-2 text-center text-primary-content">Why Choose Us?</h1>
-                <div class="flex justify-center gap-[6em]">
-                    <div>
-                        <img src="assets/images/icon1.png" class="h-[9em] mb-5" alt="">
-                        <h2 class="text-xl font-semibold text-primary-content text-center">Customer-Centric<br />Approach</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 place-items-center">
+                    <div class="flex flex-col items-center text-center">
+                        <img src="assets/images/icon1.png" class="h-[6em] sm:h-[8em] md:h-[9em] mb-3" alt="">
+                        <h2 class="text-lg sm:text-xl font-semibold text-primary-content">Customer-Centric<br />Approach</h2>
                     </div>
-                    <div>
-                        <img src="assets/images/icon2.png" class="h-[9em] mb-5" alt="">
-                        <h2 class="text-xl font-semibold text-primary-content text-center">Seamless<br />Operations</h2>
+                    <div class="flex flex-col items-center text-center">
+                        <img src="assets/images/icon2.png" class="h-[6em] sm:h-[8em] md:h-[9em] mb-3" alt="">
+                        <h2 class="text-lg sm:text-xl font-semibold text-primary-content">Seamless<br />Operations</h2>
                     </div>
-                    <div>
-                        <img src="assets/images/icon3.png" class="h-[9em] mb-5" alt="">
-                        <h2 class="text-xl font-semibold text-primary-content text-center">Commitment to<br />Excellence</h2>
+                    <div class="flex flex-col items-center text-center">
+                        <img src="assets/images/icon3.png" class="h-[6em] sm:h-[8em] md:h-[9em] mb-3" alt="">
+                        <h2 class="text-lg sm:text-xl font-semibold text-primary-content">Commitment to<br />Excellence</h2>
                     </div>
                 </div>
             </div>
-            <div class="flex flex-col gap-5">
+            <div class="flex flex-col gap-5 items-center">
                 <h1 class="text-2xl font-bold mb-2 text-center text-primary-content">Meet the Team</h1>
-                <div class="flex justify-center gap-5">
-                    <img src="assets/images/team1.png" class="rounded-full object-cover aspect-square h-[12em]" alt="">
-                    <img src="assets/images/team2.png" class="rounded-full object-cover aspect-square h-[12em]" alt="">
-                    <img src="assets/images/team3.png" class="rounded-full object-cover aspect-square h-[12em]" alt="">
-                    <div class="relative rounded-full aspect-square h-[12em] overflow-hidden">
+                <div class="flex flex-wrap justify-center gap-5 sm:grid grid-cols-2 md:grid-cols-3 lg:flex">
+                    <img src="assets/images/team1.png" class="rounded-full object-cover aspect-square h-auto max-w-[10em] sm:max-w-[12em]" alt="">
+                    <img src="assets/images/team2.png" class="rounded-full object-cover aspect-square h-auto max-w-[10em] sm:max-w-[12em]" alt="">
+                    <img src="assets/images/team3.png" class="rounded-full object-cover aspect-square h-auto max-w-[10em] sm:max-w-[12em]" alt="">
+                    <div class="relative rounded-full aspect-square h-auto max-w-[10em] sm:max-w-[12em] overflow-hidden">
                         <div class="w-full h-full bg-white absolute top-0 left-0"></div>
                         <img src="assets/images/team4.png" class="rounded-full object-cover h-full w-full relative z-20" alt="">
                     </div>
-                    <img src="assets/images/team5.png" class="rounded-full object-cover aspect-square h-[12em]" alt="">
+                    <img src="assets/images/team5.png" class="rounded-full object-cover aspect-square h-auto max-w-[10em] sm:max-w-[12em]" alt="">
                 </div>
             </div>
+
         </div>
     </div>
 
